@@ -1,0 +1,20 @@
+<div class="row maze">
+  <div class="col-md-6">
+    <h3 class="title">
+      <%= @maze.title %>
+      <span class="pull-right">
+        <% if @maze.author == current_user %>
+          <%= link_to "Edit", edit_maze_url(@maze), class: "pull-right" %>
+          <%= link_to "Delete", maze_url(@maze), confirm: "Are you sure?", method: :delete %>
+        <% else %>
+        
+        <% end %>
+        <%= link_to "Play", "play", class: "pull-right"  %>
+      </span>
+    </h3>
+    
+    <div class="lead">
+      <%= @maze.description.html_safe %>
+    </div>
+  </div>
+</div>

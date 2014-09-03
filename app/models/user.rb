@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   has_one :profile
+  has_many :mazes, foreign_key: :author_id
+  
+  
 end

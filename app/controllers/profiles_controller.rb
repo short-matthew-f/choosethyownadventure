@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
     
     @profile = Profile.new(user: @user)
     @profile.assign_attributes(profile_params)
-    
+
     if @profile.save
       flash[:success] = "Your profile has been created!"
     else

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903161529) do
+ActiveRecord::Schema.define(version: 20140903181405) do
+
+  create_table "mazes", force: true do |t|
+    t.integer  "author_id",                   null: false
+    t.string   "title",                       null: false
+    t.string   "description",                 null: false
+    t.boolean  "published",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mazes", ["author_id"], name: "index_mazes_on_author_id"
 
   create_table "profiles", force: true do |t|
     t.integer  "user_id",                             null: false

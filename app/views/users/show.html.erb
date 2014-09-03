@@ -2,4 +2,6 @@
   Welcome, <%= @user.email %>
 </h1>
 
-<%= render (@user.profile ? "/profiles/show" : "/profiles/new") %>
+<%= render (@profile.persisted? ? "/profiles/show" : "/profiles/new") %>
+
+<%= render "/mazes/index" if @user.mazes.any? %>
