@@ -3,7 +3,7 @@ class CreateMazes < ActiveRecord::Migration
     create_table :mazes do |t|
       t.integer :author_id, null: false
       t.string :title, null: false
-      t.string :description, null: false
+      t.text :description, null: false
       
       t.boolean :published, default: false
 

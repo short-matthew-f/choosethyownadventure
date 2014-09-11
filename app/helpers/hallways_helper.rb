@@ -1,0 +1,2 @@
+module HallwaysHelper
+end

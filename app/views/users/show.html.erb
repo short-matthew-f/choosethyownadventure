@@ -1,7 +1,27 @@
-<h1>
-  Welcome, <%= @user.email %>
-</h1>
+<% if @user == current_user %>
 
-<%= render (@profile.persisted? ? "/profiles/show" : "/profiles/new") %>
+  <% if @profile.persisted? %>
+    <h1>
+      <%= link_to "Profile", edit_profile_url(@profile) %>
+    </h1>
+    
+    <%= render "/profiles/show" %>  
+  <% else %>
+    <h1>
+      Create a profile
+    </h1>
+    
+    <%= render "/profiles/new" %>  
+  <% end %>
+  
+<% elsif @profile.persisted? && @profile.visible %>
+
+  <h1>
+    Profile
+  </h1>
+
+  <%= render "/profiles/show" %>  
+  
+<% end %>
 
 <%= render "/mazes/index" if @user.mazes.any? %>

@@ -1,0 +1,9 @@
+<div class="room">
+  <h4 class="title">
+    <%= link_to room.name, room, class: "link-as-title" %>
+  </h4>
+  
+  <div>
+    <%= room.description.html_safe %>
+  </div>
+</div>

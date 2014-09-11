@@ -1,0 +1,43 @@
+<%= render partial: "shared/errors", locals: { error_object: room } if room.errors.any? %>
+
+<div class="row">
+  <%= form_for form_object do |f| %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label "Room Name" %>
+        <%= f.text_field :name, class: "form-control", placeholder: "An abandoned well" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "Description" %>
+        <%= f.text_area :description, class: "form-control", placeholder: "You look around at the well and find that two things are clear: nobody has drawn water from it in some time, and you don't want to have to explore it.  It's a shame you have no choice." %>
+      </div>
+    </div>
+  
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.check_box :start, class: "form-control" %>
+        <%= f.label "Start here?" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :win do %>
+          <%= f.check_box :win, class: "form-control" %>  Win here?
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :lose do %>
+          <%= f.check_box :lose, class: "form-control" %> Lose here?
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="col-md-12">
+      <div class="form-group">
+        <% if room.persisted? %>
+          <%= f.submit "Update room", class: "btn btn-primary" %>
+        <% else %>
+          <%= f.submit "Add room", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

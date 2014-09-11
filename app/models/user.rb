@@ -5,7 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
   has_one :profile
-  has_many :mazes, foreign_key: :author_id
+  has_one :avatar, through: :profile, source: :avatar
   
+  has_many :histories
+  has_many :played_mazes, through: :histories, source: :maze
+  
+  has_many :ratings, inverse_of: :user
+  
+  has_many :mazes, foreign_key: :author_id, dependent: :destroy
   
 end

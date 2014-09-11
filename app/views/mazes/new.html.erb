@@ -1,9 +1,10 @@
 <h1>Create a maze!</h1>
 
+<%= render partial: "shared/errors", locals: { error_object: @maze } if @maze.errors.any? %>
+
 <div class="row">
   <div class="col-md-6">
     <%= form_for [current_user, @maze], html: { role: "form", multipart: true } do |f| %>
-    
       <div class="form-group">
         <%= f.label "Title" %>
         <%= f.text_field :title, class: "form-control", placeholder: "The Nefarious Adventure" %>
@@ -24,7 +25,7 @@
 <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 <script>
   tinymce.init({
-    selector:'textarea', 
+    selector: 'textarea', 
     menubar: false
   });
 </script>

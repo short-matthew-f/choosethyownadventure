@@ -1,7 +1,7 @@
 <div class="row">
   <%= render partial: "shared/errors", locals: { error_object: @profile } if @profile.errors.any? %>
   
-  <%= form_for [@user, @profile], html: { role: "form", multipart: true } do |f| %>
+  <%= form_for @profile, html: { role: "form", multipart: true } do |f| %>
     
     <div class="form-group col-md-3">
       <%= f.label "Name" %>

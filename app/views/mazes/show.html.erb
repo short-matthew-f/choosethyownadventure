@@ -1,5 +1,5 @@
-<div class="row maze">
-  <div class="col-md-6">
+<div class="row">
+  <div class="col-md-6 maze">
     <h3 class="title">
       <%= @maze.title %>
       <span class="pull-right">
@@ -12,9 +12,27 @@
         <%= link_to "Play", "play", class: "pull-right"  %>
       </span>
     </h3>
-    
     <div class="lead">
       <%= @maze.description.html_safe %>
     </div>
+  </div>
+  
+  <% if @maze.author == current_user %>
+    <div class="col-md-6 rooms">
+      <h3 class="title">
+        Current Rooms
+        <span class="pull-right">
+          <%= link_to "Add Room", new_maze_room_url(@maze) %>
+        </span>
+      </h3>
+      <div class="row">
+        <% @maze.rooms.each do |room| %>
+          <div class="col-md-6">
+            <%= render room %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   </div>
 </div>

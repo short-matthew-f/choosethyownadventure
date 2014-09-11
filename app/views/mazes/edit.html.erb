@@ -1,5 +1,7 @@
 <h1>Edit your maze!</h1>
 
+<%= render partial: "shared/errors", locals: { error_object: @maze } if @maze.errors.any? %>
+
 <div class="row">
   <div class="col-md-6">
     <%= form_for @maze, html: { role: "form", multipart: true } do |f| %>
@@ -24,7 +26,8 @@
 <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
 <script>
   tinymce.init({
-    selector:'textarea', 
-    menubar: false
+    selector: 'textarea', 
+    menubar: false,
+    height: 400
   });
 </script>

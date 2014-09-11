@@ -1,0 +1,2 @@
+class HallwaysController < ApplicationController
+end

@@ -1,18 +1,17 @@
-// Place all the styles related to the mazes controller here.
+// Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.maze {
+.room, .rooms {
   .title {
     color: maroon;
     border-bottom: 2px solid darkblue;
     padding-bottom: 4px;
     margin-bottom: 4px;
     
-    
     a.link-as-title {
       margin-left: 0px;
-      color: maroon;
+      color: lighten(maroon, 15%);
     }
     
     a {
@@ -21,3 +20,6 @@
   }
 }
 
+span.title {
+  color: maroon;
+}

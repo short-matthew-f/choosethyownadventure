@@ -3,24 +3,23 @@
 <div class="row maze">
   <div class="col-md-6">
     <% @user.mazes.each do |maze| %>
-
-      <h3 class="title">
-        <%= maze.title %>
-        <span class="pull-right">
-          <% if maze.author == current_user %>
-            <%= link_to "Edit", edit_maze_url(maze), class: "pull-right" %>
-            <%= link_to "Delete", maze_url(maze), confirm: "Are you sure?", method: :delete %>
-          <% else %>
+      <% if maze.published || maze.author == current_user %>
+        <h3 class="title">
+          <%= link_to maze.title, maze, class: "link-as-title" %>
+          <span class="pull-right">
+            <% if maze.author == current_user %>
+              <%= link_to "Edit", edit_maze_url(maze), class: "pull-right" %>
+              <%= link_to "Delete", maze_url(maze), confirm: "Are you sure?", method: :delete, class: "pull-right" %>
+            <% else %>
         
-          <% end %>
-          <%= link_to "Play", "play", class: "pull-right"  %>
-        </span>
-      </h3>
-      <p class="lead">
-        <%= maze.description %>
-      </p>
-  
+            <% end %>
+            <%= link_to "Play", "play", class: "pull-right"  %>
+          </span>
+        </h3>
+        <p class="lead">
+          <%= maze.description.html_safe %>
+        </p>
+      <% end %>
     <% end %>
   </div>
 </div>
-

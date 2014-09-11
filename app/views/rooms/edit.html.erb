@@ -1,0 +1,15 @@
+<h1>
+  Edit room: <span class="title"><%= @room.name %></span>
+</h1>
+
+<%= render partial: "shared/errors", locals: { error_object: @room } if @room.errors.any? %>
+
+<%= render partial: "form", locals: { room: @room, form_object: @room } %>
+
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: 'textarea', 
+    menubar: false
+  });
+</script>
