@@ -2,10 +2,10 @@ class Maze < ActiveRecord::Base
   # user associations
   belongs_to :author, class_name: User
   
+  has_many :histories, dependent: :destroy
   has_many :players, through: :histories, source: :user
-  has_many :histories
   
-  has_many :ratings, inverse_of: :maze
+  has_many :ratings, inverse_of: :maze, dependent: :destroy
   
   # maze associations
   has_many :rooms, dependent: :destroy, inverse_of: :maze
@@ -19,6 +19,16 @@ class Maze < ActiveRecord::Base
   
   validate :connected_if_published
   validate :solvable_if_published
+  
+  def average_rating
+    all_ratings = self.ratings
+    
+    if all_ratings.count > 0
+      (all_ratings.map(&:stars).inject(:+).to_f / all_ratings.count).round(1)
+    else
+      nil
+    end
+  end
   
   def is_connected?
     disconnected_rooms.none?

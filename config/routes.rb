@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :hallways
-
   root to: "users#show"
   
   devise_for :users
@@ -10,7 +8,9 @@ Rails.application.routes.draw do
       resources :profiles
       
       resources :mazes do
-        resources :rooms
+        resources :rooms do
+          resources :hallways
+        end
       end
     end
   end

@@ -1,0 +1,71 @@
+<h2>
+  <%= @profile.persisted? ? "Update" : "Create" %> your profile.
+</h2>
+
+<div class="row profile">
+  <%= render partial: "shared/errors", locals: { error_object: @profile } if @profile.errors.any? %>
+  
+  <%= form_for [@user, @profile], html: { role: "form", multipart: true } do |f| %>
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Name" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_field :name, class: "form-control", placeholder: "Jane Doe" %>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Location" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_field :location, class: "form-control", placeholder: "Brooklyn, NY" %>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Biography" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_area :biography, class: "form-control" %>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Profile Visible?" %>
+        </div>
+        <div class="panel-body">
+          <%= f.check_box :visible %>
+        </div>
+      </div>
+    </div>  
+    
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Avatar" %>
+        </div>
+        <div class="panel-body">
+          <%= image_tag(@profile.avatar.url, width: "100%") if @profile.avatar %>
+          <%= f.file_field :avatar %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-12">
+      <%= f.submit "Update Profile" %>    
+    </div>
+  <% end %>
+</div>
+
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>
+  tinymce.init({
+    selector: 'textarea', 
+    menubar: false
+  });
+</script>

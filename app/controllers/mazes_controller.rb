@@ -1,6 +1,10 @@
 class MazesController < ApplicationController
   before_filter :authenticate_user!
   
+  def index
+    @mazes = Maze.all
+  end
+  
   def new
     @maze = Maze.new(author: current_user)
   end

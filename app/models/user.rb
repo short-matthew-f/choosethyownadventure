@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_one :profile
+  has_one :profile, dependent: :destroy
   has_one :avatar, through: :profile, source: :avatar
   
-  has_many :histories
+  has_many :histories, dependent: :destroy
   has_many :played_mazes, through: :histories, source: :maze
   
-  has_many :ratings, inverse_of: :user
+  has_many :ratings, inverse_of: :user, dependent: :destroy
   
   has_many :mazes, foreign_key: :author_id, dependent: :destroy
   

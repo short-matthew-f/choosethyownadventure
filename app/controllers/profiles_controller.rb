@@ -16,6 +16,13 @@ class ProfilesController < ApplicationController
   
   def edit
     @profile = Profile.find(params[:id])
+    
+    if @profile.user == current_user
+      render :edit
+    else
+      flash[:error] = "No thank you."
+      redirect_to current_user
+    end
   end
   
   def update
@@ -32,6 +39,6 @@ class ProfilesController < ApplicationController
   private
   
   def profile_params
-    params.require(:profile).permit(:name, :location, :birthdate, :biography, :visible, :avatar)
+    params.require(:profile).permit(:name, :location, :biography, :visible, :avatar)
   end
 end

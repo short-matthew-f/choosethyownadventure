@@ -16,6 +16,8 @@
 <%= render "/layouts/header" if current_user %>
 
 <div class="container">
+  <%= render "/shared/flash_error" if flash[:error] %>
+
   <%= yield %>
 </div>
 

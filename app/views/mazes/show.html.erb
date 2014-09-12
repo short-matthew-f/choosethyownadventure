@@ -1,38 +1,47 @@
-<div class="row">
-  <div class="col-md-6 maze">
-    <h3 class="title">
-      <%= @maze.title %>
+<div class="maze-panel">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <%= @maze.title %> - <%= @maze.author.profile.name %>
+    
       <span class="pull-right">
-        <% if @maze.author == current_user %>
-          <%= link_to "Edit", edit_maze_url(@maze), class: "pull-right" %>
-          <%= link_to "Delete", maze_url(@maze), confirm: "Are you sure?", method: :delete %>
-        <% else %>
-        
-        <% end %>
-        <%= link_to "Play", "play", class: "pull-right"  %>
+        <%= @maze.average_rating ? "#{@maze.average_rating} out of 5" : "Unrated" %>
       </span>
-    </h3>
-    <div class="lead">
-      <%= @maze.description.html_safe %>
+    </h4>
+  </div>
+
+  <div class="panel-body">
+    <%= @maze.description.html_safe %>
+    <div class="icons">
+      <% if @maze.author == current_user %>
+        <a class="pull-right" href="#">
+          <span class="glyphicon glyphicon-trash">
+          </span>
+        </a>
+        <a class="pull-right" href="#">
+          <span class="glyphicon glyphicon-pencil">
+          </span>
+        </a>
+      <% end %>
+      <a class="pull-right" href="#">
+        <span class="glyphicon glyphicon-play">
+        </span>
+      </a>
     </div>
   </div>
   
+  <br>
+  
   <% if @maze.author == current_user %>
-    <div class="col-md-6 rooms">
-      <h3 class="title">
-        Current Rooms
-        <span class="pull-right">
-          <%= link_to "Add Room", new_maze_room_url(@maze) %>
-        </span>
-      </h3>
+    <div class="panel-heading">
+      <h5 class="panel-title room-header">
+        Rooms currently in maze.
+      </h5>
+    </div>
+  
+    <div class="panel-body">
       <div class="row">
-        <% @maze.rooms.each do |room| %>
-          <div class="col-md-6">
-            <%= render room %>
-          </div>
-        <% end %>
+        <%= render @maze.rooms %>
       </div>
     </div>
   <% end %>
-  </div>
 </div>

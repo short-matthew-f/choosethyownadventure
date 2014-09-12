@@ -1,25 +1,3 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.room, .rooms {
-  .title {
-    color: maroon;
-    border-bottom: 2px solid darkblue;
-    padding-bottom: 4px;
-    margin-bottom: 4px;
-    
-    a.link-as-title {
-      margin-left: 0px;
-      color: lighten(maroon, 15%);
-    }
-    
-    a {
-      margin-left: 10px;
-    }
-  }
-}
-
-span.title {
-  color: maroon;
-}

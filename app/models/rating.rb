@@ -4,5 +4,4 @@ class Rating < ActiveRecord::Base
   
   validates :user, :maze, :stars, presence: true
   validates_inclusion_of :stars, in: (1..5) 
-  
 end

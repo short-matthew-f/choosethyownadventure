@@ -1,0 +1,35 @@
+<div class="row profile">
+  <div class="col-md-8">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Name</div>
+      <div class="panel-body">
+        <%= @profile.name %>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Location</div>
+      <div class="panel-body">
+        <%= @profile.location %>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Biography</div>
+      <div class="panel-body">
+        <%= @profile.biography.html_safe %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Avatar</div>
+      <div class="panel-body">
+        <%= image_tag @profile.avatar.url(:original), width: "100%" %>
+      </div>
+    </div>
+  </div>
+
+</div>
