@@ -1,1 +1,19 @@
 <%= render partial: @maze, locals: { reference: :show } %>
+
+<% if @maze.author == current_user %>
+   
+    <h2 class="room rooms-header">
+      Rooms currently in maze:
+      
+      <%= link_to(new_maze_room_url(@maze)) do %>
+        <span class="glyphicon glyphicon-plus">
+        </span>
+      <% end %>
+    </h2>
+    
+    <div class="room">
+      <%= render partial: @maze.rooms, locals: { reference: :show } %>
+    </div>
+  </div>
+  
+<% end %>

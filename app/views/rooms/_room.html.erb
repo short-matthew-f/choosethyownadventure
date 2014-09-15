@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+  
+  <div class="panel-heading">
+    <h2 class="panel-title">     
+      
+       
+      <% if room == room.maze.start_room %>
+        <span class="glyphicon glyphicon-star">
+        </span>
+      <% elsif !(room.win || room.lose) %>
+        <%= link_to move_start_url(room), class: "pull-right link" do %>
+          <span class="glyphicon glyphicon-ok-sign">
+          </span>
+          Move start here
+        <% end %>
+      <% end %>
+      
+      <% if room.win %>
+        <span class="glyphicon glyphicon-thumbs-up">
+        </span>
+      <% end %>
+      
+      <% if room.lose %>
+        <span class="glyphicon glyphicon-thumbs-down">
+        </span>
+      <% end %> 
+      
+      <%= room.name %>
+    </h2>
+
+  </div>
+  
+  <div class="panel-body">
+    <div class="icons">
+      <% if room.maze.author == current_user %>
+        <%= link_to(edit_room_path(room)) do  %>
+          <span class="glyphicon glyphicon-pencil">
+          </span>
+        <% end %>
+        
+        <%= link_to(room_path(room), method: :delete, data: { confirm: "Really delete '#{room.name}'?" } ) do %>
+          <span class="glyphicon glyphicon-trash">
+          </span>
+        <% end %>
+      <% end %>
+    </div>
+    
+    
+    <%= room.description.html_safe %>
+    <hr>
+    <b>Comes from:</b> <%= room.previous_rooms.map(&:name).join(', ') %>
+  </div>
+</div>  

@@ -42,59 +42,41 @@
     <div id="maze-body-<%= maze.id %>" class="panel-collapse collapse">
   <% end %>
   
-  <div class="panel-body">
-    <%= maze.description.html_safe %>
+  <div class="panel-body">   
+    <%= image_tag(maze.image.url, class: "pull-right maze-image") %>
+    
     <div class="icons">
-      <% if maze.author == current_user %>
-        <%= link_to(maze_url(maze), class: "pull-right", method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
-          <span class="glyphicon glyphicon-trash">
-          </span>
-        <% end %>
-
-        <%= link_to(edit_maze_url(maze), class: "pull-right") do  %>
-          <span class="glyphicon glyphicon-pencil">
-          </span>
-        <% end %>
-      <% end %>
-      
       <% if reference == :index %>
-        <%= link_to(maze_url(maze), class: "pull-right") do %>
+        <%= link_to(maze_url(maze)) do %>
           <span class="glyphicon glyphicon-eye-open">
           </span>
         <% end %>
       <% end %>
       
-      <a class="pull-right" href="#">
+      <a  href="#">
         <span class="glyphicon glyphicon-play">
         </span>
       </a>
+      
+      <% if maze.author == current_user %>
+        <%= link_to(edit_maze_url(maze)) do  %>
+          <span class="glyphicon glyphicon-pencil">
+          </span>
+        <% end %>
+    
+        <%= link_to(maze_url(maze), method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
+          <span class="glyphicon glyphicon-trash">
+          </span>
+        <% end %>
+      <% end %>
     </div>
+    
+    
+    
+    <%= maze.description.html_safe %>
   </div>
     
   <% if reference == :index %>
-    </div>
-  <% end %>
-  
-  <% if maze.author == current_user && reference == :show %>
-    </div>
-    
-    <div class="panel panel-default maze">
-      <div class="panel-heading">
-        <h2 class="panel-title room-header">
-          Rooms currently in maze.
-          
-          <a class="pull-right" href="<%= new_maze_room_url(maze) %>">
-            <span class="glyphicon glyphicon-plus">
-            </span>
-          </a>
-        </h2>
-      </div>
-  
-      <div class="panel-body">
-        <div class="row">
-          <%= render maze.rooms %>
-        </div>
-      </div>
     </div>
   <% end %>
 </div>

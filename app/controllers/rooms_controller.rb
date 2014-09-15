@@ -47,6 +47,22 @@ class RoomsController < ApplicationController
     redirect_to @room.maze
   end
   
+  def move_start
+    @room = Room.find(params[:id])
+    
+    @start_room = @room.maze.start_room
+    
+    @room.start = true
+    @start_room.start = false if @start_room
+    
+    if @room.save
+      @start_room.save if @start_room
+      redirect_to @room.maze
+    else
+      flash[:error] = "Whoops."
+      redirect_to @room.maze
+    end
+  end
   
   private
   

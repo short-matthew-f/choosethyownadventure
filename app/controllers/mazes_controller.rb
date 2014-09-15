@@ -56,7 +56,7 @@ class MazesController < ApplicationController
     
     redirect_to current_user
   end
-  
+
   private
   
   def maze_params

@@ -107,11 +107,30 @@ nav.navbar {
   }
 }
 
+span.glyphicon {
+  font-size: 20px;
+  color: $profile-icons;
+}
+
 .maze {
-  span.glyphicon {
-    margin-left: 10px;
-    font-size: 20px;
-    color: $profile-icons;
+
+  
+  .icons {
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    span.glyphicon {
+      margin-left: 0px;
+      margin-right: 5px;
+    }
+  }
+  
+  .pull-right.maze-image {
+    margin-left: 15px;
+  }
+  
+  .panel-heading span.glyphicon {
+    margin-left: 5px;
   }
   
   div.panel-heading {
@@ -144,11 +163,48 @@ nav.navbar {
   }
 }
 
+h2.rooms-header {
+  font-weight: 200;
+  margin-bottom: 10px;
+}
+
+.col-md-6.room {
+  margin-top: 30px;
+}
+
+.panel.room {
+  border: 0;
+}
+
+.glyphicon.glyphicon-thumbs-up {
+  color: blue;
+}
+
+.glyphicon.glyphicon-thumbs-down {
+  color: green;
+}
+
+.glyphicon.glyphicon-star {
+  color: white;
+}
+
+
 .room {
   span.glyphicon {
+    margin: 0 5px 0 0;
+  }
+  
+  .icons {
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    span.glyphicon {
+      margin-right: 5px;
+    }
+  }
+  
+  .pull-right span.glyphicon {
     margin-left: 10px;
-    font-size: 20px;
-    color: $profile-icons;
   }
   
   div.panel-heading {

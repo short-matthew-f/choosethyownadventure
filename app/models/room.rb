@@ -34,7 +34,7 @@ class Room < ActiveRecord::Base
   def only_one_start
     start_rooms = self.maze.rooms.where(start: true)
         
-    if start_rooms.count > 1
+    if start_rooms.count > 1 && self.start == true
       errors.add(:start, "room already exists.  Please change #{start_rooms.first.name}, or uncheck start here for this room.")
     end
   end

@@ -18,4 +18,5 @@ Rails.application.routes.draw do
     end
   end
     
+  get 'rooms/:id/move_start', to: "rooms#move_start", as: "move_start"
 end
