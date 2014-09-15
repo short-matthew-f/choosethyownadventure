@@ -1,0 +1,82 @@
+<div class="panel">
+  <h2>
+    <%= maze.persisted? ? "Update" : "Create" %> your maze.
+  </h2>
+</div>
+
+<div class="row maze">
+  <%= render partial: "shared/errors", locals: { error_object: maze } if maze.errors.any? %>
+  
+  <%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
+    <div class="col-md-8">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Title" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_field :title, class: "form-control", placeholder: "The Nefarious Adventure" %>
+        </div>
+      </div>
+    
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Description" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_area :description, class: "form-control", placeholder: "There is more to an adventure than having a good time.  In this story, you will have to keep your wits about to survive." %>
+        </div>
+      </div>
+      
+      <% unless maze.persisted? %>
+      
+        <div class="panel">
+          <h2>
+            Add the starting room.
+          </h2>
+        </div>
+      
+        <%= f.fields_for :rooms do |r| %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <%= r.label "Room Name" %>
+            </div>
+            <div class="panel-body">
+              <%= r.text_field :name, class: "form-control", placeholder: "An abandoned well" %>
+            </div>
+          </div>
+          
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <%= r.label "Description" %>
+            </div>
+            <div class="panel-body">
+              <%= r.text_area :description, class: "form-control", placeholder: "You look around at the well and find that two things are clear: nobody has drawn water from it in some time, and you don't want to have to explore it.  It's a shame you have no choice." %>
+            </div>
+          </div>
+        <% end %>      
+      
+      <% end %>
+      
+    </div>
+    
+    <%= f.fields_for :picture_attributes do |p| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= p.label "Maze Image" %>
+          </div>
+          <div class="panel-body">
+            <%= image_tag(maze.image.url, width: "100%") if maze.picture %>
+            <hr>
+            <%= p.file_field :image %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="col-md-12">
+      <%= f.submit "Submit Maze", class: "btn btn-primary" %>    
+    </div>
+  <% end %>
+</div>

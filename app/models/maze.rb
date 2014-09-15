@@ -9,10 +9,15 @@ class Maze < ActiveRecord::Base
   
   # maze associations
   has_many :rooms, dependent: :destroy, inverse_of: :maze
+  accepts_nested_attributes_for :rooms
+  
   has_many :hallways, through: :rooms, source: :exits
   
   # paperclip polymorphic
   has_one :picture, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :picture
+  
+  delegate :image, to: :picture
   
   # validations
   validates :title, :description, presence: true

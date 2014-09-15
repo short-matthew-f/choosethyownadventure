@@ -1,6 +1,8 @@
-<h2>
-  <%= @profile.persisted? ? "Update" : "Create" %> your profile.
-</h2>
+<div class="panel">
+  <h2>
+    <%= @profile.persisted? ? "Update" : "Create" %> your profile.
+  </h2>
+</div>
 
 <div class="row profile">
   <%= render partial: "shared/errors", locals: { error_object: @profile } if @profile.errors.any? %>
@@ -33,15 +35,6 @@
           <%= f.text_area :biography, class: "form-control" %>
         </div>
       </div>
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <%= f.label "Profile Visible?" %>
-        </div>
-        <div class="panel-body">
-          <%= f.check_box :visible %>
-        </div>
-      </div>
     </div>  
     
     <div class="col-md-4">
@@ -51,21 +44,14 @@
         </div>
         <div class="panel-body">
           <%= image_tag(@profile.avatar.url, width: "100%") if @profile.avatar %>
+          <hr>
           <%= f.file_field :avatar %>
         </div>
       </div>
     </div>
     
     <div class="col-md-12">
-      <%= f.submit "Update Profile" %>    
+      <%= f.submit "Update Profile", class: "btn btn-primary" %>    
     </div>
   <% end %>
 </div>
-
-<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-<script>
-  tinymce.init({
-    selector: 'textarea', 
-    menubar: false
-  });
-</script>

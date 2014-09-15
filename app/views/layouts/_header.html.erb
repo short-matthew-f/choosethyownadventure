@@ -1,21 +1,38 @@
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container">
+<div id="header" class="container">
+  <nav class="navbar navbar-default " role="navigation">
+  
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Choose Thy Own Adventure</a>
     </div>
     
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <%= link_to "New Maze", new_user_maze_path(current_user) %>
+        <li class="dropdown">
+          <a data-toggle="dropdown" href="#">Mazes</a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li>
+               <%= link_to "Create a maze", new_user_maze_path(current_user) %>
+            </li>
+            <li>
+               <%= link_to "View all mazes", mazes_path %>
+            </li>
+          </ul>
         </li>
-        <li>
-          <%= link_to "Profile", user_path(current_user) %>
+        <li class="dropdown">
+          <a data-toggle="dropdown" href="#">Users</a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li>
+               <%= link_to "Your page", user_path(current_user) %>
+            </li>
+            <li>
+               <%= link_to "All users", users_path %>
+            </li>
+          </ul>
         </li>
         <li>
           <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
         </li>
       </ul>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

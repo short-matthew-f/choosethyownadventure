@@ -1,6 +1,17 @@
-<div class="row profile">
-  <div class="col-md-8">
+<div class="panel">
+  <h2>
+    Profile
+    <% if @user == current_user %>
+      <a href="<%= edit_profile_url(@profile) %>">
+        <span class="glyphicon glyphicon-pencil">
+        </span>
+      </a>
+    <% end %>
+  </h2>
+</div>
 
+<div class="row">
+  <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">Name</div>
       <div class="panel-body">

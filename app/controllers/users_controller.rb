@@ -4,14 +4,20 @@ class UsersController < ApplicationController
   def show
     if params[:id]
       @user = User.find(params[:id])
-      @profile = @user.profile
     else
       @user = current_user
-      @profile = @user.profile ? @user.profile : Profile.new(user: @user)
     end
+    
+    @profile = Profile.find_by(user: @user)
+    
+    redirect_to new_user_profile_url(@user) unless @profile
   end
   
   def edit
     
+  end
+  
+  def index
+    @users = User.all
   end
 end

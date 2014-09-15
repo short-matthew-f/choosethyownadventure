@@ -14,5 +14,169 @@
  *= require_self
  */
 
+$panel-bg: #FFEEC6;
+$body-bg: #FFEEC6;
+
+$dropdown-bg: lighten(#3D97B5, 5%);
+$navbar-default-link-active-bg: $dropdown-bg;
+$navbar-default-link-active-color: white;
+$dropdown-link-hover-bg: darken($dropdown-bg, 5%);
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+$profile-heading: #3D97B5;
+$profile-body: #8ACDE3;
+$profile-icons: #FA4C2C;
+
+$maze-heading: #FFD570;
+$maze-body: #FFE097;
+$maze-icons: #FA4C2C;
+
+$header-background: #3D97B5;
+$header-links: #FFF;
+$header-brand: #FFF;
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+nav.navbar {
+  margin-top: 10px;
+  
+  a.navbar-brand {
+    color: $header-brand;
+    font-size: 1.8em;
+    font-style: italic;
+  }
+  
+  a.navbar-brand:hover {
+    color: black;
+  };
+  
+  .nav.navbar-nav {
+    a {
+      color: $header-links;
+      font-size: 1.4em;
+    }
+    
+    a:hover {
+      background: darken($header-background, 5%);
+    };
+  }
+  
+  .collapse.navbar-collapse {
+    background: $header-background;
+  }
+}
+
+.profile {
+  span.glyphicon {
+    margin-left: 10px;
+    font-size: 21px;
+    color: $profile-icons;
+  }
+  
+  div.panel-heading {
+    background: $profile-heading;
+    font-weight: 200;
+    color: white;
+  }
+  
+  label {
+    font-weight: 200;
+  }
+  
+  div.panel-body {
+    background: $profile-body;
+    font-weight: 400;
+  }
+  
+  input {
+    font-weight: 400;
+  }
+  
+  .btn.btn-primary {
+    background: $profile-heading;
+    padding: 5px 20px;
+    font-size: 1.3em;
+  }
+}
+
+.maze {
+  span.glyphicon {
+    margin-left: 10px;
+    font-size: 20px;
+    color: $profile-icons;
+  }
+  
+  div.panel-heading {
+    background: $maze-heading;
+    
+    h2 {
+      letter-spacing: 1px;
+      font-weight: 200;
+      font-size: 1.6em;
+    }
+    
+    h2 > span.author {
+      font-size: 0.8em;
+    }
+  }
+  
+  div.panel-body {
+    background: $maze-body;
+    font-weight: 400;
+  }
+  
+  input {
+    font-weight: 400;
+  }
+  
+  .btn.btn-primary {
+    background: $maze-heading;
+    padding: 5px 20px;
+    font-size: 1.3em;
+  }
+}
+
+.room {
+  span.glyphicon {
+    margin-left: 10px;
+    font-size: 20px;
+    color: $profile-icons;
+  }
+  
+  div.panel-heading {
+    background: $maze-heading;
+    
+    h2 {
+      letter-spacing: 1px;
+      font-weight: 200;
+      font-size: 1.6em;
+    }
+    
+    h2 > span.author {
+      font-size: 0.8em;
+    }
+  }
+  
+  div.panel-body {
+    background: $maze-body;
+    font-weight: 400;
+  }
+  
+  input {
+    font-weight: 400;
+  }
+  
+  .btn.btn-primary {
+    background: $maze-heading;
+    padding: 5px 20px;
+    font-size: 1.3em;
+  }  
+}

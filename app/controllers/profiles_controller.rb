@@ -1,4 +1,10 @@
 class ProfilesController < ApplicationController
+  def new
+    @user = current_user
+    
+    @profile = Profile.new(user: @user)
+  end
+  
   def create
     @user = current_user
     
@@ -20,7 +26,8 @@ class ProfilesController < ApplicationController
     if @profile.user == current_user
       render :edit
     else
-      flash[:error] = "No thank you."
+      flash[:error] = "You cannot edit a profile that doesn't belong to you."
+      
       redirect_to current_user
     end
   end

@@ -8,8 +8,6 @@ class CreateProfiles < ActiveRecord::Migration
       
       t.text :biography
       
-      t.boolean :visible, null: false, default: false
-
       t.timestamps
     end
     

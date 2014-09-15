@@ -16,8 +16,7 @@ profile = Profile.find_or_initialize_by(user: user)
 profile.update_attributes({
   name: "Matthew Short",
   location: "Brooklyn, NY",
-  biography: "I love making things, and watching people learn.  Enjoy my adventures!",
-  visible: true
+  biography: "I love making things, and watching people learn.  Enjoy my adventures!"
 })
 
 maze = Maze.find_or_initialize_by(author: user)

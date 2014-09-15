@@ -2,14 +2,3 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$profile-heading: lighten(lightblue, 12.5%);
-$profile-body: darken($profile-heading, 12.5%);
-
-.profile {
-  div.panel-heading {
-    background: $profile-heading;
-  }
-  div.panel-body {
-    background: $profile-body;
-  }
-}

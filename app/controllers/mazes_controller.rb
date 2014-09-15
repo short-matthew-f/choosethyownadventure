@@ -6,18 +6,17 @@ class MazesController < ApplicationController
   end
   
   def new
-    @maze = Maze.new(author: current_user)
+    @maze = Maze.new
+    @maze.rooms.build
   end
   
   def create
-    @maze = Maze.new(author: current_user)
-    @maze.assign_attributes(maze_params)
+    @maze = Maze.new(maze_params)
+    @maze.author = current_user
     
     if @maze.save
-      flash[:success] = "Your maze has been created!"
       redirect_to @maze
     else
-      flash[:error] = "There are errors with your maze."
       render :new
     end
   end
@@ -42,7 +41,6 @@ class MazesController < ApplicationController
     if @maze.update(maze_params)
       redirect_to @maze
     else
-      flash[:error] = "There are errors with your maze."
       render :edit
     end
   end
@@ -62,7 +60,11 @@ class MazesController < ApplicationController
   private
   
   def maze_params
-    params.require(:maze).permit(:title, :description)
+    params.require(:maze).permit(
+      :title, 
+      :description, 
+      picture_attributes: [ :image ], 
+      rooms_attributes: [ :id, :name, :description ]
+    )
   end
-  
 end

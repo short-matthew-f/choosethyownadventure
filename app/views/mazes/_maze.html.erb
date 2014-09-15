@@ -1,35 +1,100 @@
-<div class="panel panel-default maze-panel">
+<div class="panel panel-default maze">
   <div class="panel-heading">
-    <h4 class="panel-title">
-      <a data-toggle="collapse" data-target="#maze-body-<%= maze.id %>" href="#maze-body-<%= maze.id %>">
-        <%= maze.title %> - <%= maze.author.profile.name %>
+    <h2 class="panel-title">
+      <% if reference == :index %>
+        <a data-toggle="collapse" data-target="#maze-body-<%= maze.id %>" href="#maze-body-<%= maze.id %>"><%= maze.title %></a>
+        
+        <% unless maze.author == current_user %>
+          - 
+          <span class="author">
+            <%= author_name(maze) %> 
+          
+            <%= link_to(maze.author) do %>
+              <span class="glyphicon glyphicon-user">
+              </span>
+            <% end %>
+          </span>
+        <% end %>
         
         <span class="pull-right">
           <%= maze.average_rating ? "#{maze.average_rating} out of 5" : "Unrated" %>
         </span>
-      </a>
-    </h4>
-    
+      <% else %>
+        <%= @maze.title %>
+         - 
+        <span class="author">
+          <%= author_name(maze) %> 
+          
+          <%= link_to(maze.author) do %>
+            <span class="glyphicon glyphicon-user">
+            </span>
+          <% end %>
+        </span>
+        
+        <span class="pull-right">
+          <%= @maze.average_rating ? "#{@maze.average_rating} out of 5" : "Unrated" %>
+        </span>
+      <% end %>
+    </h2>
   </div>
-  <div id="maze-body-<%= maze.id %>" class="panel-collapse collapse">
-    <div class="panel-body">
-      <%= maze.description.html_safe %>
-      <div class="icons">
-        <% if maze.author == current_user %>
-          <a class="pull-right" href="#">
-            <span class="glyphicon glyphicon-trash">
-            </span>
-          </a>
-          <a class="pull-right" href="#">
-            <span class="glyphicon glyphicon-pencil">
-            </span>
-          </a>
-        <% end %>
-        <a class="pull-right" href="#">
-          <span class="glyphicon glyphicon-play">
+  
+  <% if reference == :index %>
+    <div id="maze-body-<%= maze.id %>" class="panel-collapse collapse">
+  <% end %>
+  
+  <div class="panel-body">
+    <%= maze.description.html_safe %>
+    <div class="icons">
+      <% if maze.author == current_user %>
+        <%= link_to(maze_url(maze), class: "pull-right", method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
+          <span class="glyphicon glyphicon-trash">
           </span>
-        </a>
-      </div>
+        <% end %>
+
+        <%= link_to(edit_maze_url(maze), class: "pull-right") do  %>
+          <span class="glyphicon glyphicon-pencil">
+          </span>
+        <% end %>
+      <% end %>
+      
+      <% if reference == :index %>
+        <%= link_to(maze_url(maze), class: "pull-right") do %>
+          <span class="glyphicon glyphicon-eye-open">
+          </span>
+        <% end %>
+      <% end %>
+      
+      <a class="pull-right" href="#">
+        <span class="glyphicon glyphicon-play">
+        </span>
+      </a>
     </div>
   </div>
+    
+  <% if reference == :index %>
+    </div>
+  <% end %>
+  
+  <% if maze.author == current_user && reference == :show %>
+    </div>
+    
+    <div class="panel panel-default maze">
+      <div class="panel-heading">
+        <h2 class="panel-title room-header">
+          Rooms currently in maze.
+          
+          <a class="pull-right" href="<%= new_maze_room_url(maze) %>">
+            <span class="glyphicon glyphicon-plus">
+            </span>
+          </a>
+        </h2>
+      </div>
+  
+      <div class="panel-body">
+        <div class="row">
+          <%= render maze.rooms %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

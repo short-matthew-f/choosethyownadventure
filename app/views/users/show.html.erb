@@ -1,5 +1,15 @@
-<% if @profile.persisted? %>
-  <%= render @profile %>
-<% else %>
-  <%= render "profiles/form" %>
-<% end %>
+<div class="profile">
+  <% if @profile.persisted? %>
+    <%= render @profile %>
+  <% else %>
+    <%= render partial: "profiles/form" %>
+  <% end %>
+</div>
+
+<div class="panel">
+  <h2>
+    Mazes
+  </h2>
+</div>
+
+<%= render partial: @user.mazes, locals: { reference: :index } %>
