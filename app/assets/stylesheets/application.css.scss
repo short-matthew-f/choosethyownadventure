@@ -45,6 +45,12 @@ body {
   font-size: 16px;
 }
 
+.panel {
+  border: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 nav.navbar {
   margin-top: 10px;
   
@@ -74,10 +80,10 @@ nav.navbar {
   }
 }
 
-.profile {
+.profile {  
   span.glyphicon {
-    margin-left: 10px;
-    font-size: 21px;
+    margin: 0 5px 0 0;
+    font-size: 14px;
     color: $profile-icons;
   }
   
@@ -102,27 +108,48 @@ nav.navbar {
   
   .btn.btn-primary {
     background: $profile-heading;
-    padding: 5px 20px;
-    font-size: 1.3em;
+  }
+  
+  a > .btn.btn-primary {
+    font-size: 14px;
+    padding: 6px;
+    color: black;
+    border: 1px solid white;
   }
 }
 
-span.glyphicon {
-  font-size: 20px;
-  color: $profile-icons;
-}
+.btn-group > .btn.btn-primary {
+  font-size: 18px;
+  margin: 0 8px;
+  color: black;
+};
 
-.maze {
-
+.maze, .room {
+  a { color: $maze-icons; }
   
   .icons {
-    margin-right: 10px;
-    margin-bottom: 10px;
+    button {
+      font-size: 14px;
+      padding: 8px;
+      margin-left: 4px;
+      margin-bottom: 0px;
+      color: black;
+    }
+    
+    a {
+      text-decoration: none;
+      color: black;
+    }
 
     span.glyphicon {
-      margin-left: 0px;
-      margin-right: 5px;
+      margin: 0 5px 0 0;
+      font-size: 14px;
     }
+  }
+  
+  hr {
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   
   .pull-right.maze-image {
@@ -158,22 +185,27 @@ span.glyphicon {
   
   .btn.btn-primary {
     background: $maze-heading;
-    padding: 5px 20px;
-    font-size: 1.3em;
+    border: 1px solid white;
+  }
+  
+  .btn.btn-primary.submit {
+    font-size: 18px;
+    margin-bottom: 20px;
   }
 }
 
-h2.rooms-header {
-  font-weight: 200;
-  margin-bottom: 10px;
+.room {
+  h2 {
+    font-weight: 200;
+  }
+
+  .btn.btn-primary.active {
+    background: $maze-heading;
+  }
 }
 
 .col-md-6.room {
   margin-top: 30px;
-}
-
-.panel.room {
-  border: 0;
 }
 
 .glyphicon.glyphicon-thumbs-up {
@@ -188,51 +220,11 @@ h2.rooms-header {
   color: white;
 }
 
+.btn.btn-primary.form-internal {
+  margin-bottom: 0;
+}
 
-.room {
-  span.glyphicon {
-    margin: 0 5px 0 0;
-  }
-  
-  .icons {
-    margin-right: 10px;
-    margin-bottom: 10px;
-
-    span.glyphicon {
-      margin-right: 5px;
-    }
-  }
-  
-  .pull-right span.glyphicon {
-    margin-left: 10px;
-  }
-  
-  div.panel-heading {
-    background: $maze-heading;
-    
-    h2 {
-      letter-spacing: 1px;
-      font-weight: 200;
-      font-size: 1.6em;
-    }
-    
-    h2 > span.author {
-      font-size: 0.8em;
-    }
-  }
-  
-  div.panel-body {
-    background: $maze-body;
-    font-weight: 400;
-  }
-  
-  input {
-    font-weight: 400;
-  }
-  
-  .btn.btn-primary {
-    background: $maze-heading;
-    padding: 5px 20px;
-    font-size: 1.3em;
-  }  
+span.glyphicon {
+  font-size: 20px;
+  color: $profile-icons;
 }

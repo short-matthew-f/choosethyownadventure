@@ -1,43 +1,112 @@
-<%= render partial: "shared/errors", locals: { error_object: room } if room.errors.any? %>
-
-<div class="row">
-  <%= form_for form_object do |f| %>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label "Room Name" %>
-        <%= f.text_field :name, class: "form-control", placeholder: "An abandoned well" %>
-      </div>
-      <div class="form-group">
-        <%= f.label "Description" %>
-        <%= f.text_area :description, class: "form-control", placeholder: "You look around at the well and find that two things are clear: nobody has drawn water from it in some time, and you don't want to have to explore it.  It's a shame you have no choice." %>
-      </div>
-    </div>
+<div class="panel">
+  <h2>
+    <%= room.persisted? ? "Update room #{room.name}" : "Add room to #{room.maze.title}" %>
+  </h2>
+  <p>
+    Each room must have a name and a description.  Images are optional.
+  </p>
+</div>
   
-    <div class="col-md-4">
-      <div class="form-group">
-        <%= f.check_box :start, class: "form-control" %>
-        <%= f.label "Start here?" %>
+<%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
+
+  <div class="row room">
+    
+    <div class="col-md-8">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Room Name" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_field :name, class: "form-control", placeholder: "An abandoned well" %>
+        </div>
       </div>
-      <div class="form-group">
-        <%= f.label :win do %>
-          <%= f.check_box :win, class: "form-control" %>  Win here?
-        <% end %>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Room events
+        </div>
+        <div class="panel-body text-center">
+          <div class="btn-group" data-toggle="buttons">
+            <label id="room-win" class="btn btn-primary form-internal <%= "active" if room.win %>">
+              <input type="radio" name="room[win_condition]" value="win"
+                     <%= 'checked=""' if room.win %>> 
+                     <span class="glyphicon glyphicon-thumbs-up"></span> Win Here
+            </label>
+            <label id="room-lose" class="btn btn-primary form-internal <%= "active" if room.lose %>">
+              <input type="radio" name="room[win_condition]" value="lose"
+                     <%= 'checked=""' if room.lose %>> 
+                     <span class="glyphicon glyphicon-thumbs-down"></span> Lose Here
+            </label>
+            <label id="room-neither" class="btn btn-primary form-internal <%= "active" unless room.win || room.lose %>">
+              <input type="radio" name="room[win_condition]" value="neither" 
+                     <%= 'checked=""' unless room.win || room.lose %>> Neither
+            </label>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <%= f.label :lose do %>
-          <%= f.check_box :lose, class: "form-control" %> Lose here?
-        <% end %>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= f.label "Description" %>
+        </div>
+        <div class="panel-body">
+          <%= f.text_area :description, class: "form-control", placeholder: "You look around at the well and find that two things are clear: nobody has drawn water from it in some time, and you don't want to have to explore it.  It's a shame you have no choice." %>
+        </div>
       </div>
     </div>
     
-    <div class="col-md-12">
-      <div class="form-group">
-        <% if room.persisted? %>
-          <%= f.submit "Update room", class: "btn btn-primary" %>
-        <% else %>
-          <%= f.submit "Add room", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+    <div class="col-md-4">
+    
+      <%= f.fields_for :picture_attributes do |p| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= p.label "Room Image" %>
+          </div>
+          <div class="panel-body">
+            <%= image_tag(room.image.url, width: "100%") if room.picture %>
+            <hr>
+            <%= p.file_field :image %>
+          </div>
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
+    
+  <% unless room.is_first_room? || room.is_only_room?  %>
+    
+  <div class="panel">
+    <h2>
+      Add entrances.
+    </h2>
+    <p>
+      In each box below, put a description of the exit which leads to this room.
+    </p>
+  </div>
+  
+  
+    <div class="row room">
+      <%= f.fields_for :entrances do |e| %>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <em>Coming From</em>: <%= e.label e.object.entrance.name %>
+            </div>
+            <div class="panel-body">
+              <%= e.hidden_field :entrance_id, value: e.object.entrance.id %>
+              <%= e.text_field :description, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   <% end %>
-</div>
+    
+  <div class="row room">
+    <div class="col-md-12">
+      <%= f.submit "Submit Room", class: "btn btn-primary submit" %>    
+    </div>
+  </div>
+  
+<% end %>

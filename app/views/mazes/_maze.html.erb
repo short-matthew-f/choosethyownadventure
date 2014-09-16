@@ -7,9 +7,8 @@
         <% unless maze.author == current_user %>
           - 
           <span class="author">
-            <%= author_name(maze) %> 
-          
             <%= link_to(maze.author) do %>
+              <%= author_name(maze) %> 
               <span class="glyphicon glyphicon-user">
               </span>
             <% end %>
@@ -23,9 +22,8 @@
         <%= @maze.title %>
          - 
         <span class="author">
-          <%= author_name(maze) %> 
-          
           <%= link_to(maze.author) do %>
+            <%= author_name(maze) %> 
             <span class="glyphicon glyphicon-user">
             </span>
           <% end %>
@@ -43,37 +41,49 @@
   <% end %>
   
   <div class="panel-body">   
-    <%= image_tag(maze.image.url, class: "pull-right maze-image") %>
+    <%= image_tag(maze.image.url, class: "pull-right maze-image") if maze.picture %>
     
-    <div class="icons">
+    <%= maze.description.html_safe %>
+    
+    <div class="icons pull-right">
       <% if reference == :index %>
         <%= link_to(maze_url(maze)) do %>
-          <span class="glyphicon glyphicon-eye-open">
-          </span>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-eye-open">
+            </span>
+            View
+          </button>
         <% end %>
       <% end %>
       
-      <a  href="#">
-        <span class="glyphicon glyphicon-play">
-        </span>
+      <a href="#">
+        <button class="btn btn-primary">
+          <span class="glyphicon glyphicon-play">
+          </span>
+          Play
+        </button>
       </a>
       
       <% if maze.author == current_user %>
+        
         <%= link_to(edit_maze_url(maze)) do  %>
-          <span class="glyphicon glyphicon-pencil">
-          </span>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil">
+            </span>
+            Edit
+          </button>
         <% end %>
     
         <%= link_to(maze_url(maze), method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
-          <span class="glyphicon glyphicon-trash">
-          </span>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-trash">
+            </span>
+            Delete
+          </button>
         <% end %>
+        
       <% end %>
     </div>
-    
-    
-    
-    <%= maze.description.html_safe %>
   </div>
     
   <% if reference == :index %>

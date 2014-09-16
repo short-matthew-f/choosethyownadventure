@@ -1,11 +1,7 @@
-<div class="col-md-12">
-  <h3>There are errors!</h3>
-</div>
+<h3>There are errors!</h3>
 
 <% error_object.errors.full_messages.each do |error| %>
-  <div class="col-md-6">
-    <div class="alert alert-danger">
-      <%= error %>
-    </div>
+  <div class="alert alert-danger">
+    <%= error %>
   </div>
 <% end %>

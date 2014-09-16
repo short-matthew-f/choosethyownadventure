@@ -2,19 +2,29 @@ class RoomsController < ApplicationController
   
   def new
     @maze = Maze.find(params[:maze_id])
-    
     @room = Room.new(maze: @maze)
+    
+    @maze.rooms.each do |r|
+      @room.entrances.find_or_initialize_by(entrance: r) unless r.id == @room.id
+    end
   end
   
   def create 
     @maze = Maze.find(params[:maze_id])
     
-    @room = Room.new(maze: @maze)
-    @room.assign_attributes(room_params)
+    @room = Room.new(room_params)
+    @room.maze = @maze
+    @room.win, @room.lose = win_conditions
     
     if @room.save
-      redirect_to @room
+      update_entrances(@room) unless @room.is_only_room?
+      
+      redirect_to @maze
     else
+      @maze.rooms.each do |r|
+        @room.entrances.find_or_initialize_by(entrance: r) unless r.id == @room.id
+      end
+      
       flash[:errors] = @room.errors.full_messages
       render :new
     end
@@ -26,14 +36,25 @@ class RoomsController < ApplicationController
   
   def edit
     @room = Room.find(params[:id])
+    
+    @room.maze.rooms.each do |r|
+      @room.entrances.find_or_initialize_by(entrance: r) unless r.id == @room.id
+    end
   end
   
   def update
-    @room = Room.find(params[:id])
+    @room = Room.find(params[:id]) 
+    @room.win, @room.lose = win_conditions
     
     if @room.update(room_params)
-      redirect_to @room
+      update_entrances(@room) unless @room.is_only_room?
+      
+      redirect_to @room.maze
     else
+      @room.maze.rooms.each do |r|
+        @room.entrances.find_or_initialize_by(entrance: r) unless r.id == @room.id
+      end
+      
       flash[:errors] = @room.errors.full_messages
       render :edit
     end
@@ -67,7 +88,42 @@ class RoomsController < ApplicationController
   private
   
   def room_params
-    params.require(:room).permit(:name, :description, :start, :win, :lose)
+    params.require(:room).permit(
+      :name, 
+      :description,
+      picture_attributes: [ :image ]
+    )
+  end
+  
+  def win_condition_params
+    params.require(:room).permit(:win_condition)
+  end
+  
+  def entrance_params
+    params.require(:room).require(:entrances_attributes)
+  end
+  
+  def update_entrances(room)
+    entrances_hash = entrance_params.select { |k,v| !v["description"].blank? }
+    entrances_ids = entrances_hash.map { |k,v| v['entrance_id'] }
+    
+    entrances_hash.each do |k, v|
+      entrance = Hallway.find_or_initialize_by(entrance_id: v['entrance_id'], exit: room)
+      entrance.update(description: v["description"])
+    end
+    
+    room.previous_room_ids = entrances_ids
+  end
+  
+  def win_conditions
+    case win_condition_params.require("win_condition")
+    when "win"
+      [true, false]
+    when "lose"
+      [false, true]
+    else
+      [false, false]
+    end
   end
   
 end

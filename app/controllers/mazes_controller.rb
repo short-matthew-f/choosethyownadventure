@@ -17,6 +17,7 @@ class MazesController < ApplicationController
     if @maze.save
       redirect_to @maze
     else
+      flash[:errors] = @maze.errors.full_messages
       render :new
     end
   end
@@ -55,6 +56,17 @@ class MazesController < ApplicationController
     end
     
     redirect_to current_user
+  end
+  
+  def play
+    @maze = Maze.find(params[:maze_id])
+    
+    
+  end
+  
+  def move_to_room
+    @maze = Maze.find(params[:maze_id])
+    @room = Room.find(params[:room_id])
   end
 
   private

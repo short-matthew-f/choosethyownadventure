@@ -5,10 +5,15 @@
     <h2 class="room rooms-header">
       Rooms currently in maze:
       
-      <%= link_to(new_maze_room_url(@maze)) do %>
-        <span class="glyphicon glyphicon-plus">
-        </span>
-      <% end %>
+      <div class="icons pull-right">
+        <%= link_to(new_maze_room_url(@maze)) do %>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus">
+            </span>
+            Add Room
+          </button>
+        <% end %>
+      </div>
     </h2>
     
     <div class="room">
