@@ -6,12 +6,10 @@
         <span class="glyphicon glyphicon-star">
         </span>
       <% elsif !(room.win || room.lose) %>
-        <%= link_to move_start_url(room), class: "pull-right icons" do %>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-ok-sign">
-            </span>
-            Make start room
-          </button>
+        <%= link_to move_start_url(room), class: "pull-right icons btn btn primary" do %>
+          <span class="glyphicon glyphicon-ok-sign">
+          </span>
+          Make start room
         <% end %>
       <% end %>
       

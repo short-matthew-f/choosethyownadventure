@@ -6,12 +6,10 @@
       Rooms currently in maze:
       
       <div class="icons pull-right">
-        <%= link_to(new_maze_room_url(@maze)) do %>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus">
-            </span>
-            Add Room
-          </button>
+        <%= link_to(new_maze_room_url(@maze), class: "btn btn-primary") do %>
+          <span class="glyphicon glyphicon-plus">
+          </span>
+          Add Room
         <% end %>
       </div>
     </h2>
