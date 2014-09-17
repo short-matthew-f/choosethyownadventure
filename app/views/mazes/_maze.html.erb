@@ -49,47 +49,37 @@
     
     <div class="icons pull-right">
       <% if reference == :index %>
-        <%= link_to(maze_url(maze)) do %>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-eye-open">
-            </span>
-            View
-          </button>
+        <%= link_to(maze_url(maze), class: "btn btn-primary") do %>
+          <span class="glyphicon glyphicon-eye-open">
+          </span>
+          View
         <% end %>
       <% end %>
       
-      <%= link_to(play_maze_path(maze)) do %>
-        <button class="btn btn-primary">
-          <span class="glyphicon glyphicon-play">
-          </span>
-          Play
-        </button>
+      <%= link_to(play_maze_path(maze), class: "btn btn-primary") do %>
+        <span class="glyphicon glyphicon-play">
+        </span>
+        Play
       <% end %>
       
-      <%= link_to(maze_ratings_path(maze)) do %>
-        <button class="btn btn-primary">
-          <span class="glyphicon glyphicon-comment">
-          </span>
-          Ratings
-        </button>
+      <%= link_to(maze_ratings_path(maze), class: "btn btn-primary") do %>
+        <span class="glyphicon glyphicon-comment">
+        </span>
+        Ratings
       <% end %>
       
       <% if maze.author == current_user %>
         
-        <%= link_to(edit_maze_url(maze)) do  %>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil">
-            </span>
-            Edit
-          </button>
+        <%= link_to(edit_maze_url(maze), class: "btn btn-primary") do  %>
+          <span class="glyphicon glyphicon-pencil">
+          </span>
+          Edit
         <% end %>
     
-        <%= link_to(maze_url(maze), method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-trash">
-            </span>
-            Delete
-          </button>
+        <%= link_to(maze_url(maze), class: "btn btn-primary", method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
+          <span class="glyphicon glyphicon-trash">
+          </span>
+          Delete
         <% end %>
         
       <% end %>

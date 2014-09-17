@@ -42,29 +42,24 @@
       </div>
       <div class="link-panel text-center">
         <div class="panel-body">
-          <%= button_tag(class: "btn btn-primary") do %>
-            <%= link_to(move_to_room_url(maze, maze.start_room)) do %>
-              <span class="glyphicon glyphicon-play">
-              </span> Start the maze
-            <% end %>
+          <%= link_to(move_to_room_url(maze, maze.start_room), class: "btn btn-primary") do %>
+            <span class="glyphicon glyphicon-play">
+            </span> Start the maze
           <% end %>
         </div>
         
         <% if current_user.has_finished?(maze) %>
           <div class="panel-body">
-            <%= button_tag(class: "btn btn-primary") do %>
-              <% if current_user.has_rated?(maze) %>
-                <%= link_to( edit_rating_path( current_user.ratings.find_by( maze: maze ))) do %>
-                  <span class="glyphicon glyphicon-play">
-                  </span> Edit your rating
-                <% end %>
-              <% else %>
-                <%= link_to(new_maze_rating_path(maze)) do %>
-                  <span class="glyphicon glyphicon-play">
-                  </span> Rate the maze
-                <% end %>
+            <% if current_user.has_rated?(maze) %>
+              <%= link_to( edit_rating_path( current_user.ratings.find_by( maze: maze )), class: "btn btn-primary") do %>
+                <span class="glyphicon glyphicon-play">
+                </span> Edit your rating
               <% end %>
-              
+            <% else %>
+              <%= link_to(new_maze_rating_path(maze), class: "btn btn-primary") do %>
+                <span class="glyphicon glyphicon-play">
+                </span> Rate the maze
+              <% end %>
             <% end %>
           </div>
         <% end %>

@@ -44,21 +44,18 @@
     
       <div class="icons pull-right">
         <% if room.maze.author == current_user %>
-          <button class="btn btn-primary">
-            <%= link_to(edit_room_path(room)) do  %>
-              <span class="glyphicon glyphicon-pencil">
-              </span>
-              Edit
-            <% end %>
-          </button>
+          <%= link_to(edit_room_path(room), class: "btn btn-primary") do  %>
+            <span class="glyphicon glyphicon-pencil">
+            </span>
+            Edit
+          <% end %>
         
-          <button class="btn btn-primary">
-            <%= link_to(room_path(room), method: :delete, data: { confirm: "Really delete '#{room.name}'?" } ) do %>
-              <span class="glyphicon glyphicon-trash">
-              </span>
-              Delete
-            <% end %>
-          </button>
+          <%= link_to(room_path(room), class: "btn btn-primary", method: :delete, data: { confirm: "Really delete '#{room.name}'?" } ) do %>
+            <span class="glyphicon glyphicon-trash">
+            </span>
+            Delete
+          <% end %>
+
         <% end %>
       </div>
     </div>

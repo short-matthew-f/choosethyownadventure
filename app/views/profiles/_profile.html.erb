@@ -2,11 +2,9 @@
   <h2>
     Profile
     <% if @user == current_user %>
-      <a href="<%= edit_profile_url(@profile) %>" class="pull-right">
-        <button class="btn btn-primary">
-          <span class="glyphicon glyphicon-pencil">
-          </span> Edit
-        </button>
+      <a href="<%= edit_profile_url(@profile) %>" class="pull-right btn btn-primary">
+        <span class="glyphicon glyphicon-pencil">
+        </span> Edit
       </a>
     <% end %>
   </h2>
