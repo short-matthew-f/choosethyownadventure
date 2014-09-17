@@ -1,0 +1,64 @@
+<div class="row">
+    
+  <div class="col-md-8">
+    <div class="panel panel-default maze">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          You are in: <%= room.name %>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <%= room.description.html_safe %>
+      </div>
+    </div>
+  </div>
+    
+  <% if room.exits.any? %>
+    <div class="col-md-4">
+      <div class="panel panel-default maze">
+        <div class="panel-heading">
+          <h2 class="panel-title">
+            Where to next?
+          </h2>
+        </div>
+        <div class="panel-body">
+          <% room.exits.each do |exit| %>
+            <p>
+              <%= link_to(move_to_room_url(room.maze, exit.exit)) do %>
+                <%= exit.description %>
+              <% end %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>  
+
+
+  <% if room.win || room.lose %>
+    <div class="col-md-4">
+      <div class="panel panel-default maze">
+        <div class="panel-heading">
+          <h2 class="panel-title">
+            The End!
+          </h2>
+        </div>
+        
+        <% if room.win %>
+          <div class="panel-body alert-maze-won">
+            Congratulations on successfully completing the adventure!
+          </div>
+        <% else %>
+          <div class="panel-body alert-maze-lost">
+            Sadly, you have lost the adventure.
+          </div>
+        <% end %>
+        
+        <div class="panel-body">
+          <%= link_to "Play Maze Again", play_maze_path(maze) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>

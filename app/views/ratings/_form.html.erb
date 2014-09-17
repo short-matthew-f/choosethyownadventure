@@ -1,0 +1,33 @@
+<div class="panel">
+  <h2>
+    <%= rating.persisted? ? "Update" : "Create" %> your rating for <b><%= maze.title %></b>.
+  </h2>
+</div>
+
+<div class="maze">
+  <%= form_for form_object do |f| %>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= f.label "Description" %>
+      </div>
+      <div class="panel-body">
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+    </div>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= f.label "Numerical Value" %>
+      </div>
+      <div class="panel-body">
+        <%= f.select :stars, (1..5), class: "form-control", selected: 3 %>
+      </div>
+    </div>
+
+
+    
+    <%= f.submit "Submit Maze", class: "btn btn-primary submit" %>   
+  
+  <% end %>
+</div>

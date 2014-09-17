@@ -25,6 +25,14 @@ class Maze < ActiveRecord::Base
   validate :connected_if_published
   validate :solvable_if_published
   
+  def total_wins
+    self.histories.map(&:win_count).inject(:+)
+  end
+  
+  def total_losses
+    self.histories.map(&:loss_count).inject(:+)
+  end
+  
   def average_rating
     all_ratings = self.ratings
     

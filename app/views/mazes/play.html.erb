@@ -1,0 +1,5 @@
+<% if @current_room %>
+  <%= render partial: "play/room", locals: { maze: @maze, room: @current_room, condition: @condition } %>
+<% else %>
+  <%= render partial: "play/maze", locals: { maze: @maze } %>
+<% end %>

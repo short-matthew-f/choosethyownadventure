@@ -60,13 +60,42 @@ class MazesController < ApplicationController
   
   def play
     @maze = Maze.find(params[:maze_id])
+    @history = History.find_or_initialize_by(user: current_user, maze: @maze)
+    @current_room = @history.current_room
     
+    if @current_room && @current_room.win
+      @history.win_count += 1
+      @history.room_id = nil
+      @condition = :win
+    elsif @current_room && @current_room.lose
+      @history.loss_count += 1
+      @history.room_id = nil
+      @condition = :lose
+    else
+      @condition = :nil
+    end
     
+    @history.save
   end
   
   def move_to_room
     @maze = Maze.find(params[:maze_id])
     @room = Room.find(params[:room_id])
+    @history = History.find_or_initialize_by(user: current_user, maze: @maze)
+    
+    if @history.room_id
+      @current_room = Room.find(@history.room_id)
+      
+      if @current_room.next_rooms.include?(@room)
+        @history.update(room_id: @room.id)
+      else
+        flash[:error] = "You cannot move to that room out of order."
+      end
+    elsif @room == @maze.start_room
+      @history.update(room_id: @room.id)
+    end
+    
+    redirect_to action: "play"
   end
 
   private

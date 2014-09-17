@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :profiles
       
       resources :mazes, except: [:index] do
+        resources :ratings
+        
         resources :rooms do
           resources :hallways
         end

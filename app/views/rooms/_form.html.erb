@@ -1,14 +1,19 @@
-<div class="panel">
-  <h2>
-    <%= room.persisted? ? "Update room #{room.name}" : "Add room to #{room.maze.title}" %>
-  </h2>
-  <p>
-    Each room must have a name and a description.  Images are optional.
-  </p>
-</div>
-  
+<%= render partial: "shared/errors", locals: { error_object: room } if room.errors.any? %>
+
 <%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
 
+  <div class="panel room clearfix">
+    <h2>
+      <%= room.persisted? ? "Update room #{room.name}" : "Add room to #{room.maze.title}" %>
+      <div class="pull-right">
+        <%= f.submit "Submit Room", class: "btn btn-primary submit" %>    
+      </div>
+    </h2>
+    <p>
+      Each room must have a name and a description.  Images are optional.
+    </p>
+  </div>
+  
   <div class="row room">
     
     <div class="col-md-8">
@@ -21,31 +26,7 @@
           <%= f.text_field :name, class: "form-control", placeholder: "An abandoned well" %>
         </div>
       </div>
-      
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Room events
-        </div>
-        <div class="panel-body text-center">
-          <div class="btn-group" data-toggle="buttons">
-            <label id="room-win" class="btn btn-primary form-internal <%= "active" if room.win %>">
-              <input type="radio" name="room[win_condition]" value="win"
-                     <%= 'checked=""' if room.win %>> 
-                     <span class="glyphicon glyphicon-thumbs-up"></span> Win Here
-            </label>
-            <label id="room-lose" class="btn btn-primary form-internal <%= "active" if room.lose %>">
-              <input type="radio" name="room[win_condition]" value="lose"
-                     <%= 'checked=""' if room.lose %>> 
-                     <span class="glyphicon glyphicon-thumbs-down"></span> Lose Here
-            </label>
-            <label id="room-neither" class="btn btn-primary form-internal <%= "active" unless room.win || room.lose %>">
-              <input type="radio" name="room[win_condition]" value="neither" 
-                     <%= 'checked=""' unless room.win || room.lose %>> Neither
-            </label>
-          </div>
-        </div>
-      </div>
-      
+    
       <div class="panel panel-default">
         <div class="panel-heading">
           <%= f.label "Description" %>
@@ -71,20 +52,45 @@
         </div>
       <% end %>
       
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Room events
+        </div>
+        
+        <div class="panel-body">
+          <div class="btn-group full-width-buttons" data-toggle="buttons">
+            <label id="room-win" class="btn btn-primary form-internal <%= "active" if room.win %>">
+              <input type="radio" name="room[win_condition]" value="win"
+                     <%= 'checked=""' if room.win %>> 
+                     <span class="glyphicon glyphicon-thumbs-up"></span> Win Here
+            </label>
+            <label id="room-lose" class="btn btn-primary form-internal <%= "active" if room.lose %>">
+              <input type="radio" name="room[win_condition]" value="lose"
+                     <%= 'checked=""' if room.lose %>> 
+                     <span class="glyphicon glyphicon-thumbs-down"></span> Lose Here
+            </label>
+            <label id="room-neither" class="btn btn-primary form-internal <%= "active" unless room.win || room.lose %>">
+              <input type="radio" name="room[win_condition]" value="neither" 
+                     <%= 'checked=""' unless room.win || room.lose %>> Neither
+            </label>
+          </div>
+        </div>
+      </div>
+      
     </div>
+    
   </div>
     
   <% unless room.is_first_room? || room.is_only_room?  %>
     
-  <div class="panel">
-    <h2>
-      Add entrances.
-    </h2>
-    <p>
-      In each box below, put a description of the exit which leads to this room.
-    </p>
-  </div>
-  
+    <div class="panel room">
+      <h2>
+        Add entrances.
+      </h2>
+      <p>
+        In each box below, put a description of the exit which leads to this room.
+      </p>
+    </div>
   
     <div class="row room">
       <%= f.fields_for :entrances do |e| %>
@@ -101,12 +107,6 @@
         </div>
       <% end %>
     </div>
-  <% end %>
     
-  <div class="row room">
-    <div class="col-md-12">
-      <%= f.submit "Submit Room", class: "btn btn-primary submit" %>    
-    </div>
-  </div>
-  
+  <% end %>
 <% end %>

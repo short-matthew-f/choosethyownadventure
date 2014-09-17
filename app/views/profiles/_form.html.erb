@@ -1,13 +1,18 @@
-<div class="panel">
-  <h2>
-    <%= @profile.persisted? ? "Update" : "Create" %> your profile.
-  </h2>
-</div>
+<%= render partial: "shared/errors", locals: { error_object: @profile } if @profile.errors.any? %>
 
-<div class="row profile">
-  <%= render partial: "shared/errors", locals: { error_object: @profile } if @profile.errors.any? %>
-  
-  <%= form_for [@user, @profile], html: { role: "form", multipart: true } do |f| %>
+<%= form_for [@user, @profile], html: { role: "form", multipart: true } do |f| %>
+
+  <div class="panel profile">
+    <h2>
+      <%= @profile.persisted? ? "Update" : "Create" %> your profile.
+    
+      <div class="pull-right">
+        <%= f.submit "Update Profile", class: "btn btn-primary" %>    
+      </div>
+    </h2>
+  </div>
+
+  <div class="row profile">
     <div class="col-md-8">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -48,10 +53,6 @@
           <%= f.file_field :avatar %>
         </div>
       </div>
-    </div>
-    
-    <div class="col-md-12">
-      <%= f.submit "Update Profile", class: "btn btn-primary" %>    
     </div>
   <% end %>
 </div>

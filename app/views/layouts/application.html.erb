@@ -25,7 +25,45 @@
 <script>
   tinymce.init({
     selector: 'textarea', 
-    menubar: false
+    menubar: false,
+    height: 200,
+    toolbar: [
+    "styleselect | bold italic underline | undo redo "
+    ],
+    style_formats: [
+      {title: "Title", format: "h1"},
+      {title: "Subtitle", format: "h2"},
+      {title: "Paragraph", format: "p"}
+    ],
+    content_css: "/assets/description.css",
+    setup: function(editor) {
+      // editor.addButton('Title', {
+      //   title : 'Title',
+      //   text: "Title",
+      //   onclick : function() {
+      //     tinymce.get
+      //   }
+      // });
+      //
+      editor.on("init", function() {
+        editor.addShortcut("ctrl+1", "", "");
+        editor.addShortcut("ctrl+2", "", "");
+        editor.addShortcut("ctrl+3", "", "");
+        editor.addShortcut("ctrl+4", "", "");
+        editor.addShortcut("ctrl+5", "", "");
+        editor.addShortcut("ctrl+6", "", "");
+        editor.addShortcut("ctrl+7", "", "");
+        editor.addShortcut("ctrl+8", "", "");
+        editor.addShortcut("ctrl+9", "", "");
+        editor.addShortcut("ctrl+0", "", "");
+        editor.addShortcut("ctrl+h1", "", "");
+        editor.addShortcut("ctrl+h2", "", "");
+        editor.addShortcut("ctrl+h3", "", "");
+        editor.addShortcut("ctrl+h4", "", "");
+        editor.addShortcut("ctrl+h5", "", "");
+        editor.addShortcut("ctrl+h6", "", "");
+      });
+    }
   });
 </script>
 

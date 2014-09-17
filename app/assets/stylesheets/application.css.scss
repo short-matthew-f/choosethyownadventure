@@ -12,20 +12,36 @@
  *
  *= require_tree .
  *= require_self
+ *= stub description
  */
 
 $panel-bg: #FFEEC6;
 $body-bg: #FFEEC6;
 
+$panel-heading-padding: 8px 10px;
+$panel-body-padding: 10px;
+$panel-border-radius: 0;
+
 $dropdown-bg: lighten(#3D97B5, 5%);
+
+$navbar-border-radius: 0;
 $navbar-default-link-active-bg: $dropdown-bg;
 $navbar-default-link-active-color: white;
+
+$navbar-default-color: #fff;
+$navbar-default-bg: #3D97B5;
+$navbar-default-link-color: #fff;
+$navbar-default-link-hover-bg: darken($navbar-default-bg, 5%);;
+
+$alert-maze-won: lighten(#3D97B5, 10%);
+$alert-maze-lost: lighten(#FA4C2C, 10%);
+
 $dropdown-link-hover-bg: darken($dropdown-bg, 5%);
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Open-Sans|Handlee|Roboto:700,500);
 
 $profile-heading: #3D97B5;
 $profile-body: #8ACDE3;
@@ -40,7 +56,7 @@ $header-links: #FFF;
 $header-brand: #FFF;
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open-Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
 }
@@ -49,6 +65,31 @@ body {
   border: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.description {
+  h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  
+  p {
+    font-family: 'Open-Sans', sans-serif;
+    
+    font-size: 18px;
+    font-weight: 300;
+  }
+}
+
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
 }
 
 nav.navbar {
@@ -62,7 +103,7 @@ nav.navbar {
   
   a.navbar-brand:hover {
     color: black;
-  };
+  }
   
   .nav.navbar-nav {
     a {
@@ -72,7 +113,7 @@ nav.navbar {
     
     a:hover {
       background: darken($header-background, 5%);
-    };
+    }
   }
   
   .collapse.navbar-collapse {
@@ -122,10 +163,18 @@ nav.navbar {
   font-size: 18px;
   margin: 0 8px;
   color: black;
-};
+}
 
 .maze, .room {
-  a { color: $maze-icons; }
+  a { 
+    color: $maze-icons; 
+  }
+  
+  p > a {
+    color: darken($navbar-default-bg, 10%);
+    font-size: 18px;
+    font-weight: 300;
+  }
   
   .icons {
     button {
@@ -148,7 +197,7 @@ nav.navbar {
   }
   
   hr {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
   
@@ -194,6 +243,50 @@ nav.navbar {
   }
 }
 
+div.link-panel {
+  div.panel-body {
+    margin: 0;
+    padding: 6px 12px;
+  }
+  
+  button {
+    margin: 6px 0;
+    width: 100%;
+    
+    a {
+      font-size: 14px;
+      color: black;
+    }
+    
+    span {
+      font-size: 14px;
+      margin-right: 6px;
+    }
+  }
+}
+
+div.full-width-buttons {
+  padding: 8px;
+  
+  > label.form-internal {
+    display: block;
+    margin: 8px;
+    width: 100%;
+  }
+}
+
+.alert-maze-won {
+  background: $alert-maze-won;
+}
+
+.alert-maze-lost {
+  background: $alert-maze-lost;
+}
+
+.btn-group > .btn.btn-primary {
+  margin: 4px 0px;
+}
+
 .room {
   h2 {
     font-weight: 200;
@@ -218,10 +311,6 @@ nav.navbar {
 
 .glyphicon.glyphicon-star {
   color: white;
-}
-
-.btn.btn-primary.form-internal {
-  margin-bottom: 0;
 }
 
 span.glyphicon {

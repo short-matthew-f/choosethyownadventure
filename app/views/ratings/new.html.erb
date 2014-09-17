@@ -1,0 +1,3 @@
+<%= render partial: "shared/errors", locals: { error_object: @rating } if @rating.errors.any? %>
+
+<%= render partial: "form", locals: { maze: @maze, rating: @rating, form_object: [ @maze, @rating ] } %>

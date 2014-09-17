@@ -43,7 +43,9 @@
   <div class="panel-body">   
     <%= image_tag(maze.image.url, class: "pull-right maze-image") if maze.picture %>
     
-    <%= maze.description.html_safe %>
+    <div class="description">
+      <%= maze.description.html_safe %>
+    </div>
     
     <div class="icons pull-right">
       <% if reference == :index %>
@@ -56,13 +58,21 @@
         <% end %>
       <% end %>
       
-      <a href="#">
+      <%= link_to(play_maze_path(maze)) do %>
         <button class="btn btn-primary">
           <span class="glyphicon glyphicon-play">
           </span>
           Play
         </button>
-      </a>
+      <% end %>
+      
+      <%= link_to(maze_ratings_path(maze)) do %>
+        <button class="btn btn-primary">
+          <span class="glyphicon glyphicon-comment">
+          </span>
+          Ratings
+        </button>
+      <% end %>
       
       <% if maze.author == current_user %>
         

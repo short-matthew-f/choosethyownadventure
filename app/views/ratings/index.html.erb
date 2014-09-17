@@ -1,0 +1,17 @@
+<div class="panel panel-default maze">
+  
+  <div class="panel-heading">
+    <h2 class="panel-title">
+      Ratings for <%= @maze.title %>
+    </h2>
+  </div>
+  
+  <% @ratings.each do |rating| %>
+    <div class="panel-body">
+      <%= rating.stars %> out of 5.
+      
+      <%= rating.description %> - <%= rating.user.name %>
+    </div>
+  <% end %>
+  
+</div>

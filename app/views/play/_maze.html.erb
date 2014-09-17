@@ -1,0 +1,88 @@
+<div class="row">
+    
+  <div class="col-md-3">
+    <div class="panel panel-default maze">
+      <div class="panel-heading">
+        Maze Stats
+      </div>
+      <div class="panel-body">
+        <p>
+          Total Plays
+          <span class="pull-right">
+            <%= maze.total_wins + maze.total_losses %>
+          </span>
+        </p>
+        
+        <p>
+          Wins
+          <span class="pull-right">
+            <%= maze.total_wins %>
+          </span>
+        </p>
+        
+        <p>
+          Losses
+          <span class="pull-right">
+            <%= maze.total_losses %>
+          </span>
+        </p>
+        
+        <p>
+          Average Rating
+          <span class="pull-right">
+            <%= maze.average_rating || "Unrated" %>
+          </span>
+        </p>
+      </div>
+    </div>
+    
+    <div class="panel panel-default maze">
+      <div class="panel-heading">
+        Links
+      </div>
+      <div class="link-panel text-center">
+        <div class="panel-body">
+          <%= button_tag(class: "btn btn-primary") do %>
+            <%= link_to(move_to_room_url(maze, maze.start_room)) do %>
+              <span class="glyphicon glyphicon-play">
+              </span> Start the maze
+            <% end %>
+          <% end %>
+        </div>
+        
+        <% if current_user.has_finished?(maze) %>
+          <div class="panel-body">
+            <%= button_tag(class: "btn btn-primary") do %>
+              <% if current_user.has_rated?(maze) %>
+                <%= link_to( edit_rating_path( current_user.ratings.find_by( maze: maze ))) do %>
+                  <span class="glyphicon glyphicon-play">
+                  </span> Edit your rating
+                <% end %>
+              <% else %>
+                <%= link_to(new_maze_rating_path(maze)) do %>
+                  <span class="glyphicon glyphicon-play">
+                  </span> Rate the maze
+                <% end %>
+              <% end %>
+              
+            <% end %>
+          </div>
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-9">
+    <div class="panel panel-default maze">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          <%= maze.title %>
+        </h2>
+      </div>
+      <div class="panel-body">
+        <%= maze.description.html_safe %>
+      </div>
+    </div>
+  </div>
+</div>

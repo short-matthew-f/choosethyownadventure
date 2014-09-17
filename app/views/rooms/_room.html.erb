@@ -38,7 +38,9 @@
   
   <div class="panel-body">
     <div class="clearfix">
-      <%= room.description.html_safe %>
+      <div class="description">
+        <%= room.description.html_safe %>
+      </div>
     
       <div class="icons pull-right">
         <% if room.maze.author == current_user %>

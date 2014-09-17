@@ -1,13 +1,16 @@
-<div class="panel">
-  <h2>
-    <%= maze.persisted? ? "Update" : "Create" %> your maze.
-  </h2>
-</div>
+<%= render partial: "shared/errors", locals: { error_object: maze } if maze.errors.any? %>
 
-<div class="row maze">
-  <%= render partial: "shared/errors", locals: { error_object: maze } if maze.errors.any? %>
+<%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
+  <div class="panel maze clearfix">
+    <h2>
+      <%= maze.persisted? ? "Update" : "Create" %> your maze.
+      <div class="pull-right">
+        <%= f.submit "Submit Maze", class: "btn btn-primary submit" %>  
+      </div>
+    </h2>
+  </div>
   
-  <%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
+  <div class="row maze">
     <div class="col-md-8">
       
       <div class="panel panel-default">
@@ -27,37 +30,7 @@
           <%= f.text_area :description, class: "form-control", placeholder: "There is more to an adventure than having a good time.  In this story, you will have to keep your wits about to survive." %>
         </div>
       </div>
-      
-      <% unless maze.persisted? %>
-      
-        <div class="panel">
-          <h2>
-            Add the starting room.
-          </h2>
-        </div>
-      
-        <%= f.fields_for :rooms do |r| %>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <%= r.label "Room Name" %>
-            </div>
-            <div class="panel-body">
-              <%= r.text_field :name, class: "form-control", placeholder: "An abandoned well" %>
-            </div>
-          </div>
-          
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <%= r.label "Description" %>
-            </div>
-            <div class="panel-body">
-              <%= r.text_area :description, class: "form-control", placeholder: "You look around at the well and find that two things are clear: nobody has drawn water from it in some time, and you don't want to have to explore it.  It's a shame you have no choice." %>
-            </div>
-          </div>
-        <% end %>      
-      
-      <% end %>
-      
+    
     </div>
     
     <%= f.fields_for :picture_attributes do |p| %>
@@ -74,9 +47,12 @@
         </div>
       </div>
     <% end %>
-
+    
     <div class="col-md-12">
-      <%= f.submit "Submit Maze", class: "btn btn-primary submit" %>    
+        
     </div>
-  <% end %>
-</div>
+  </div>
+
+  
+<% end %>
+
