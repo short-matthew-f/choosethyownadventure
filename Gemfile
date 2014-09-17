@@ -6,7 +6,7 @@ gem 'rails', '4.1.5'
 
 gem 'devise'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass'
@@ -33,8 +33,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-
-
 
 # amazon
 
