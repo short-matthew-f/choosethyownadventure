@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :ensure_user_has_created_profile
   before_filter :ensure_user_has_finished_maze, only: [:new, :create]
   
   def new

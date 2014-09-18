@@ -138,6 +138,12 @@ nav.navbar {
     font-weight: 200;
   }
   
+  div.panel-heading {
+    a {
+      color: white;
+    }
+  }
+  
   div.panel-body {
     background: $profile-body;
     font-weight: 400;

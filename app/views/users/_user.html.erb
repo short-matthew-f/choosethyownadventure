@@ -1,27 +1,34 @@
-<div class="col-md-3 col-sm-6">
+<div class="col-md-4 col-sm-6 profile">
   <div class="panel panel-default">
-    <div class="panel-heading">Name</div>
+    <div class="panel-heading">
+      <h4>
+        <%= link_to user.profile.name, user %>
+      </h4>
+    </div>
     <div class="panel-body">
-      <%= user.profile.name %>
-      <%= link_to user do %>
-        <span class="glyphicon glyphicon-user"></span>
-      <% end %>
+      <div class="media">
+        <%= link_to(user, class: "pull-left") do %>
+          <% if user.profile.avatar %>
+            <%= image_tag user.profile.avatar.url(:original), width: "64" %>
+          <% else %>
+            <%= image_tag "avatar.png" %>
+          <% end %>
+        <% end %>
+        <div class="media-body">
+          <p>
+            Published Mazes
+            <span class="pull-right">
+              <%= user.mazes.count %>
+            </span>
+          </p>
+          <p>
+            Maze Quality
+            <span class="pull-right">
+              <%= user.average_maze_quality %>
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Published Mazes</div>
-    <div class="panel-body">
-      <%= user.profile.name %>
-    </div>
-  </div>
-  <div class="panel panel-default">  
-    <div class="panel-heading">Maze Quality</div>
-    <div class="panel-body">
-      <%= user.profile.name %>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-3 col-sm-6">
-  <%= image_tag user.profile.avatar.url, width: "100%"  %>
 </div>

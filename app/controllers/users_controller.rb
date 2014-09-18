@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :ensure_user_has_created_profile, except: [:show]
   
   def show
     if params[:id]
@@ -11,10 +12,6 @@ class UsersController < ApplicationController
     @profile = Profile.find_by(user: @user)
     
     redirect_to new_user_profile_url(@user) unless @profile
-  end
-  
-  def edit
-    
   end
   
   def index

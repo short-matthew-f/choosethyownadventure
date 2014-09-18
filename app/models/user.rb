@@ -16,6 +16,14 @@ class User < ActiveRecord::Base
   
   has_many :mazes, foreign_key: :author_id, dependent: :destroy
   
+  def average_maze_quality
+    ratings = self.mazes.map(&:average_rating).compact
+    
+    return "unrated" if ratings.count == 0
+    
+    return (ratings.inject(:+).to_f / ratings.count).round(1)
+  end
+  
   def is_playing?(maze)
     relevant_history = self.histories.find_by(maze_id: maze.id)
     
