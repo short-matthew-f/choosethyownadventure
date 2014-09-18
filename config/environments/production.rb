@@ -46,7 +46,6 @@ Rails.application.configure do
   
   config.assets.digest = true
   config.assets.compile = true
-  config.action_dispatch.x_sendfile_header = ‘X-Accel-Redirect’
   config.serve_static_assets = true
 
   # Prepend all log lines with the following tags.
