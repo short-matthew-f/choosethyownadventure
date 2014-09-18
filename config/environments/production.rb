@@ -45,6 +45,9 @@ Rails.application.configure do
   config.log_level = :info
   
   config.assets.digest = true
+  congif.assets.compile = true
+  config.action_dispatch.x_sendfile_header = ‘X-Accel-Redirect’
+  config.serve_static_assets = true
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
