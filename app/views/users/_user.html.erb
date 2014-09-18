@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">Name</div>
     <div class="panel-body">
-      <%= user.profile.name %>
+      <%= user.profile.name if user.profile %>
       <%= link_to user do %>
         <span class="glyphicon glyphicon-user"></span>
       <% end %>
@@ -11,13 +11,13 @@
   <div class="panel panel-default">
     <div class="panel-heading">Published Mazes</div>
     <div class="panel-body">
-      <%= user.profile.name %>
+      <%= user.mazes.where(published: true).count %>
     </div>
   </div>
   <div class="panel panel-default">  
     <div class="panel-heading">Maze Quality</div>
     <div class="panel-body">
-      <%= user.profile.name %>
+      <%= user.mazes.select { |m| m.average_rating }.inject(:+) %>
     </div>
   </div>
 </div>
