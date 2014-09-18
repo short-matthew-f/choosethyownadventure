@@ -4,7 +4,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :user_id, null: false
       
       t.string :name, null: false
-      t.string :location
+      t.string :location, null: false
       
       t.text :biography
       

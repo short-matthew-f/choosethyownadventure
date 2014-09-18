@@ -1,6 +1,8 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
   
+  validates :name, :location, presence: true
+  
   has_attached_file :avatar, styles: {
     original: "200x200#",
     thumb: "50x50#"

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140911152451) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "hallways", force: true do |t|
     t.integer  "entrance_id", null: false
     t.integer  "exit_id",     null: false
@@ -21,9 +24,9 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "updated_at"
   end
 
-  add_index "hallways", ["entrance_id", "exit_id"], name: "index_hallways_on_entrance_id_and_exit_id", unique: true
-  add_index "hallways", ["entrance_id"], name: "index_hallways_on_entrance_id"
-  add_index "hallways", ["exit_id"], name: "index_hallways_on_exit_id"
+  add_index "hallways", ["entrance_id", "exit_id"], name: "index_hallways_on_entrance_id_and_exit_id", unique: true, using: :btree
+  add_index "hallways", ["entrance_id"], name: "index_hallways_on_entrance_id", using: :btree
+  add_index "hallways", ["exit_id"], name: "index_hallways_on_exit_id", using: :btree
 
   create_table "histories", force: true do |t|
     t.integer  "user_id",                null: false
@@ -35,9 +38,9 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "updated_at"
   end
 
-  add_index "histories", ["maze_id"], name: "index_histories_on_maze_id"
-  add_index "histories", ["user_id", "maze_id"], name: "index_histories_on_user_id_and_maze_id", unique: true
-  add_index "histories", ["user_id"], name: "index_histories_on_user_id"
+  add_index "histories", ["maze_id"], name: "index_histories_on_maze_id", using: :btree
+  add_index "histories", ["user_id", "maze_id"], name: "index_histories_on_user_id_and_maze_id", unique: true, using: :btree
+  add_index "histories", ["user_id"], name: "index_histories_on_user_id", using: :btree
 
   create_table "mazes", force: true do |t|
     t.integer  "author_id",                   null: false
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "updated_at"
   end
 
-  add_index "mazes", ["author_id"], name: "index_mazes_on_author_id"
+  add_index "mazes", ["author_id"], name: "index_mazes_on_author_id", using: :btree
 
   create_table "pictures", force: true do |t|
     t.integer  "imageable_id",       null: false
@@ -62,12 +65,10 @@ ActiveRecord::Schema.define(version: 20140911152451) do
   end
 
   create_table "profiles", force: true do |t|
-    t.integer  "user_id",                             null: false
-    t.string   "name"
-    t.string   "location"
-    t.date     "birthdate"
+    t.integer  "user_id",             null: false
+    t.string   "name",                null: false
+    t.string   "location",            null: false
     t.text     "biography"
-    t.boolean  "visible",             default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar_file_name"
@@ -76,7 +77,7 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", unique: true
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", unique: true, using: :btree
 
   create_table "ratings", force: true do |t|
     t.integer  "maze_id",     null: false
@@ -87,9 +88,9 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "updated_at"
   end
 
-  add_index "ratings", ["maze_id", "user_id"], name: "index_ratings_on_maze_id_and_user_id", unique: true
-  add_index "ratings", ["maze_id"], name: "index_ratings_on_maze_id"
-  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id"
+  add_index "ratings", ["maze_id", "user_id"], name: "index_ratings_on_maze_id_and_user_id", unique: true, using: :btree
+  add_index "ratings", ["maze_id"], name: "index_ratings_on_maze_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "rooms", force: true do |t|
     t.integer  "maze_id",                     null: false
@@ -102,7 +103,7 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "updated_at"
   end
 
-  add_index "rooms", ["maze_id"], name: "index_rooms_on_maze_id"
+  add_index "rooms", ["maze_id"], name: "index_rooms_on_maze_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -119,7 +120,7 @@ ActiveRecord::Schema.define(version: 20140911152451) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
