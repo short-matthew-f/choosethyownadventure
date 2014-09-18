@@ -26,12 +26,14 @@
       </div>
     </div>
     
-    <div class="panel panel-default">
-      <div class="panel-heading">Biography</div>
-      <div class="panel-body">
-        <%= @profile.biography.html_safe %>
+    <% if @profile.biography %>
+      <div class="panel panel-default">
+        <div class="panel-heading">Biography</div>
+        <div class="panel-body">
+          <%= @profile.biography.html_safe %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
   
   <div class="col-md-4">
