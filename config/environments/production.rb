@@ -45,7 +45,7 @@ Rails.application.configure do
   config.log_level = :info
   
   config.assets.digest = true
-  config.assets.compile = true
+  
   config.serve_static_assets = true
 
   # Prepend all log lines with the following tags.
