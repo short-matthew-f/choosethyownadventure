@@ -4,6 +4,7 @@ class Picture < ActiveRecord::Base
   # paperclip
   has_attached_file :image, 
     styles: { original: "150x150#" },
-    default_url: ActionController::Base.helpers.asset_path('missing.jpg')
+    default_url: ActionController::Base.helpers.asset_url('missing.jpg')
+    
   validates_attachment_content_type( :image, content_type: /\Aimage\/.*\Z/ )
 end
