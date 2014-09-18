@@ -23,5 +23,5 @@
 </div>
 
 <div class="col-md-3 col-sm-6">
-  <%= image_tag user.profile.avatar.url, width: "100%"  %>
+  <%= image_tag user.profile.avatar.url, width: "100%" if user.profile %>
 </div>
