@@ -288,6 +288,16 @@ div.full-width-buttons {
   }
 }
 
+.devise-links {
+  margin-top: 40px;
+  a.btn.btn-primary { 
+    margin: 4px 0 0 0;
+    padding: 6px 12px;
+    display: block;
+    width: 100;
+  }
+}
+
 .alert-maze-won {
   background: $alert-maze-won;
 }

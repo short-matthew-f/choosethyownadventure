@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-inline") do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="panel profile sign-up">
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
@@ -20,17 +20,6 @@
             <%= f.password_field :password, autocomplete: "off" %>
           </div>
         </div>
-        
-        <% if devise_mapping.rememberable? -%>
-          <div class="panel panel-default">
-            <div class="panel-body">
-                <%= f.label :remember_me, class: "checkbox" do %>
-                    <%= f.check_box :remember_me, class: "checkbox" %> 
-                    Remember Me
-                <% end %>
-            </div>
-          </div>
-        <% end -%>
 
         <%= f.submit "Log in", class: "btn btn-primary" %>
       </div>
