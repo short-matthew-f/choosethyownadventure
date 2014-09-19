@@ -56,14 +56,6 @@
       
       <div class="col-md-12">
         <div class="icons pull-right">
-          <% if reference == :index %>
-            <%= link_to(maze_url(maze), class: "btn btn-primary") do %>
-              <span class="glyphicon glyphicon-eye-open">
-              </span>
-              View
-            <% end %>
-          <% end %>
-      
           <%= link_to(play_maze_path(maze), class: "btn btn-primary") do %>
             <span class="glyphicon glyphicon-play">
             </span>
@@ -77,6 +69,14 @@
           <% end %>
       
           <% if maze.author == current_user %>
+          
+            <% if reference == :index %>
+              <%= link_to(maze_url(maze), class: "btn btn-primary") do %>
+                <span class="glyphicon glyphicon-eye-open">
+                </span>
+                View
+              <% end %>
+            <% end %>
         
             <%= link_to(edit_maze_url(maze), class: "btn btn-primary") do  %>
               <span class="glyphicon glyphicon-pencil">
