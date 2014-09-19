@@ -55,6 +55,38 @@ $header-background: #3D97B5;
 $header-links: #FFF;
 $header-brand: #FFF;
 
+.maze-rating {
+  margin: 4px 12px;
+  width: 109px;
+  height: 20px;
+  background: url('sprite_stars.png');
+}
+
+.maze-rating.none {
+  background-position: 0 120px;
+}
+
+.maze-rating.one {
+  background-position: 0 100px;
+}
+
+.maze-rating.two {
+  background-position: 0 80px;
+}
+
+.maze-rating.three {
+  background-position: 0 60px;
+}
+
+.maze-rating.four {
+  background-position: 0 40px;
+}
+
+.maze-rating.five {
+  background-position: 0 20px;
+}
+
+
 body {
   font-family: 'Open-Sans', sans-serif;
   font-weight: 400;
