@@ -38,6 +38,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'unicorn'
+
 # amazon
 
 gem 'figaro', github: 'sealocal/figaro'
