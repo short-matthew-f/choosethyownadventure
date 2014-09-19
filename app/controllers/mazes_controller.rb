@@ -25,6 +25,8 @@ class MazesController < ApplicationController
   
   def show
     @maze = Maze.find(params[:id])
+    
+    redirect_to current_user unless @maze.author == current_user
   end
   
   def edit
@@ -43,7 +45,7 @@ class MazesController < ApplicationController
     if @maze.update(published: true)
       
     else
-      flash[:error] = @maze.errors.full_messages.join(', ')
+      flash[:errors] = @maze.errors.full_messages
     end
          
     redirect_to @maze
@@ -75,6 +77,7 @@ class MazesController < ApplicationController
     @maze = Maze.find(params[:id])
     @history = History.find_or_initialize_by(user: current_user, maze: @maze)
     @current_room = @history.current_room
+    @rating = current_user.ratings.find_by(maze: @maze)
     
     if @current_room && @current_room.win
       @history.win_count += 1

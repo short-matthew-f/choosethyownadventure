@@ -20,4 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      profile:
+        name: "Name"
+        location: "Location"
+      errors:
+        models:
+          profile:
+            attributes:
+              name:
+                blank: "is required."
+              location:
+                blank: "is required."

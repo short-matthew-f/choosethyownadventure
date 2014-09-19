@@ -1,8 +1,7 @@
 <div class="panel panel-default maze">
-  
   <div class="panel-heading">
     <h2 class="panel-title">
-      Ratings for <%= @maze.title %>
+      Ratings for <%= link_to @maze.title, play_maze_url(@maze) %>
     </h2>
   </div>
   

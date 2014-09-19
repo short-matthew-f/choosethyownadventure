@@ -48,18 +48,11 @@
           <% end %>
         </div>
         
-        <% if current_user.has_finished?(maze) %>
+        <% if current_user.has_finished?(maze) && !current_user.has_rated?(maze) %>
           <div class="panel-body">
-            <% if current_user.has_rated?(maze) %>
-              <%= link_to( edit_rating_path( current_user.ratings.find_by( maze: maze )), class: "btn btn-primary") do %>
-                <span class="glyphicon glyphicon-play">
-                </span> Edit your rating
-              <% end %>
-            <% else %>
-              <%= link_to(new_maze_rating_path(maze), class: "btn btn-primary") do %>
-                <span class="glyphicon glyphicon-play">
-                </span> Rate the maze
-              <% end %>
+            <%= link_to(new_maze_rating_path(maze), class: "btn btn-primary") do %>
+              <span class="glyphicon glyphicon-play">
+              </span> Rate the maze
             <% end %>
           </div>
         <% end %>
@@ -79,5 +72,23 @@
         <%= maze.description.html_safe %>
       </div>
     </div>
+    
+    <% if rating %>
+      <div class="panel panel-default maze">
+        <div class="panel-heading">
+          <h2 class="panel-title clearfix icons">
+            Your Rating
+            <%= link_to( edit_rating_path( current_user.ratings.find_by( maze: maze )), class: "btn btn-primary pull-right") do %>
+              <span class="glyphicon glyphicon-play">
+              </span> Edit your rating
+            <% end %>
+          </h2>
+        </div>
+        <div class="panel-body">
+          <%= rating.description %>
+          <span class="pull-right maze-rating <%= rating_class(rating) %>">
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

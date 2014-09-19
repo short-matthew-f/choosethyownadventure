@@ -15,12 +15,10 @@ class ProfilesController < ApplicationController
     @profile.assign_attributes(profile_params)
 
     if @profile.save
-      flash[:success] = "Your profile has been created!"
+      redirect_to current_user 
     else
-      flash[:error] = "There are errors with your profile."
+      render :new
     end
-    
-    redirect_to current_user 
   end
   
   def edit

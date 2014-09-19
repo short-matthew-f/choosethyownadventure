@@ -17,7 +17,7 @@ class RatingsController < ApplicationController
     @rating.user = current_user
     
     if @rating.save
-      redirect_to @maze
+      redirect_to play_maze_url(@maze)
     else
       render :new
     end
@@ -39,7 +39,7 @@ class RatingsController < ApplicationController
     @maze = @rating.maze
     
     if @rating.update(rating_params)
-      redirect_to @maze
+      redirect_to play_maze_url(@maze)
     else
       render :new
     end
