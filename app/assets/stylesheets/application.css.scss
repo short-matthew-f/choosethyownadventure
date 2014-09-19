@@ -55,34 +55,42 @@ $header-background: #3D97B5;
 $header-links: #FFF;
 $header-brand: #FFF;
 
-.maze-rating {
-  margin: 4px 12px;
+.rating {
+  
   width: 109px;
   height: 20px;
   background: image-url('sprite_stars.png');
 }
 
-.maze-rating.none {
+.maze .rating {
+  margin: 4px 12px;
+}
+
+.user .rating {
+  margin: 4px 0px;
+}
+
+.rating.none {
   background-position: 0 120px;
 }
 
-.maze-rating.one {
+.rating.one {
   background-position: 0 100px;
 }
 
-.maze-rating.two {
+.rating.two {
   background-position: 0 80px;
 }
 
-.maze-rating.three {
+.rating.three {
   background-position: 0 60px;
 }
 
-.maze-rating.four {
+.rating.four {
   background-position: 0 40px;
 }
 
-.maze-rating.five {
+.rating.five {
   background-position: 0 20px;
 }
 
@@ -242,6 +250,10 @@ nav.navbar {
   
   .pull-right.maze-image {
     margin-left: 15px;
+  }
+  
+  .pull-left.maze-image {
+    margin-right: 15px;
   }
   
   .panel-heading span.glyphicon {

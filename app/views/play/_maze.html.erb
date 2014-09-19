@@ -69,6 +69,11 @@
         </h2>
       </div>
       <div class="panel-body">
+        
+        <% if maze.picture %>
+          <%= image_tag(maze.image.url, class: "maze-image pull-right") %>
+        <% end %>
+        
         <%= maze.description.html_safe %>
       </div>
     </div>
@@ -86,7 +91,7 @@
         </div>
         <div class="panel-body">
           <%= rating.description %>
-          <span class="pull-right maze-rating <%= personal_rating_class(rating) %>">
+          <span class="pull-right rating <%= personal_rating_class(rating) %>">
         </div>
       </div>
     <% end %>

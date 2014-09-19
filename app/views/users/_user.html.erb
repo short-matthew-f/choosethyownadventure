@@ -18,17 +18,29 @@
           <p>
             Published Mazes
             <span class="pull-right">
-              <%= user.mazes.count %>
+              <%= user.mazes.published.count %>
             </span>
           </p>
           <p>
             Maze Quality
-            <span class="pull-right">
-              <%= user.average_maze_quality %>
+            <span class="pull-right rating <%= user_rating_class(user) %>">
             </span>
           </p>
         </div>
-      </div>
+      </div>   
+      <hr>
+      <p>
+        Played Mazes
+        <span class="pull-right">
+          <%= user.histories.count %>
+        </span>
+      </p>
+      <p>
+        Win Percentage
+        <span class="pull-right">
+          <%= win_percentage(user) %>
+        </span>
+      </p>    
     </div>
   </div>
 </div>

@@ -8,6 +8,10 @@
         </h2>
       </div>
       <div class="panel-body">
+        <% if room.picture %>
+          <%= image_tag(room.image.url, class: "maze-image pull-right") %>
+        <% end %>
+        
         <%= room.description.html_safe %>
       </div>
     </div>

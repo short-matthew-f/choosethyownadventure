@@ -36,7 +36,11 @@
   
   <div class="panel-body">
     <div class="clearfix">
-      <div class="description">
+      <div class="description clearfix">
+        <% if room.picture %>
+          <%= image_tag(room.image.url, class: "maze-image pull-left") %>
+        <% end %>
+        
         <%= room.description.html_safe %>
       </div>
     
