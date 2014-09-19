@@ -11,5 +11,54 @@
     <p>
       Sign up, log in, and after completing a small profile you can view and play though existing mazes, create your own, and publish them for other users to see.
     </p>
+    
+    <h3>
+      Check out the images below for inspiration.
+    </h3>
+    <div id="preview-carousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#preview-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#preview-carousel" data-slide-to="1"></li>
+        <li data-target="#preview-carousel" data-slide-to="2"></li>
+        <li data-target="#preview-carousel" data-slide-to="3"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= image_tag('my_profile.png') %>
+          <div class="carousel-caption">
+            <h3>Create a profile</h3>
+          </div>
+        </div>
+        <div class="item">
+          <%= image_tag('play_maze.png') %>
+          <div class="carousel-caption">
+            <h3>Play an adventure</h3>
+          </div>
+        </div>
+        <div class="item">
+          <%= image_tag('create_maze.png') %>
+          <div class="carousel-caption">
+            <h3>Build your own</h3>
+          </div>
+        </div>
+        <div class="item">
+          <%= image_tag('all_users.png') %>
+          <div class="carousel-caption">
+            <h3>Find friends and share with each other</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#preview-carousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#preview-carousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
   </div>
 </div>

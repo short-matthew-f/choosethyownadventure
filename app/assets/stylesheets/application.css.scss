@@ -56,7 +56,6 @@ $header-links: #FFF;
 $header-brand: #FFF;
 
 .rating {
-  
   width: 109px;
   height: 20px;
   background: image-url('sprite_stars.png');
@@ -99,6 +98,7 @@ body {
   font-family: 'Open-Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
+  margin-bottom: 40px;
 }
 
 .panel {
