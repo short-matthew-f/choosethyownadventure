@@ -21,6 +21,8 @@ class RoomsController < ApplicationController
     if @room.save
       update_entrances(@room) unless @room.is_only_room?
       
+      @maze.update(published: false)
+      
       redirect_to @maze
     else
       @maze.rooms.each do |r|
@@ -46,14 +48,18 @@ class RoomsController < ApplicationController
   
   def update
     @room = Room.find(params[:id]) 
+    @maze = @room.maze
+    
     @room.win, @room.lose = win_conditions
     
     if @room.update(room_params)
       update_entrances(@room) unless @room.is_only_room?
       
-      redirect_to @room.maze
+      @maze.update(published: false)
+      
+      redirect_to @maze
     else
-      @room.maze.rooms.each do |r|
+      @maze.rooms.each do |r|
         @room.entrances.find_or_initialize_by(entrance: r) unless r.id == @room.id
       end
       

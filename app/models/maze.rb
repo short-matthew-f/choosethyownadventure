@@ -25,6 +25,11 @@ class Maze < ActiveRecord::Base
   validate :connected_if_published
   validate :solvable_if_published
   
+  # scopes
+  
+  scope :published, -> { where(published: true) }
+  scope :unpublished, -> { where(published: false) }
+  
   def total_wins
     self.histories.map(&:win_count).inject(:+)
   end
@@ -39,16 +44,17 @@ class Maze < ActiveRecord::Base
     if all_ratings.count > 0
       (all_ratings.map(&:stars).inject(:+).to_f / all_ratings.count).round(1)
     else
-      nil
+      0
     end
   end
   
   def is_connected?
-    disconnected_rooms.none?
+    disconnected_rooms.nil? || disconnected_rooms.none?
   end
   
   def disconnected_rooms
     current_room = self.start_room
+    
     return nil unless current_room
     
     rooms_left = self.rooms - [current_room]

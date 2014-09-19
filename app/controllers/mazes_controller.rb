@@ -3,7 +3,7 @@ class MazesController < ApplicationController
   before_filter :ensure_user_has_created_profile
   
   def index
-    @mazes = Maze.all
+    @mazes = Maze.all.published | Maze.where(author: current_user)
   end
   
   def new
@@ -37,6 +37,18 @@ class MazesController < ApplicationController
     end
   end
   
+  def publish
+    @maze = Maze.find(params[:id])
+    
+    if @maze.update(published: true)
+      
+    else
+      flash[:error] = @maze.errors.full_messages.join(', ')
+    end
+         
+    redirect_to @maze
+  end
+  
   def update 
     @maze = Maze.find(params[:id])
     
@@ -60,27 +72,23 @@ class MazesController < ApplicationController
   end
   
   def play
-    @maze = Maze.find(params[:maze_id])
+    @maze = Maze.find(params[:id])
     @history = History.find_or_initialize_by(user: current_user, maze: @maze)
     @current_room = @history.current_room
     
     if @current_room && @current_room.win
       @history.win_count += 1
       @history.room_id = nil
-      @condition = :win
     elsif @current_room && @current_room.lose
       @history.loss_count += 1
       @history.room_id = nil
-      @condition = :lose
-    else
-      @condition = :nil
     end
     
     @history.save
   end
   
   def move_to_room
-    @maze = Maze.find(params[:maze_id])
+    @maze = Maze.find(params[:id])
     @room = Room.find(params[:room_id])
     @history = History.find_or_initialize_by(user: current_user, maze: @maze)
     

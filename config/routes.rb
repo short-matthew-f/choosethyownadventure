@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   end
     
   get 'rooms/:id/move_start', to: "rooms#move_start", as: "move_start"
-  
-  get 'mazes/:maze_id/play', to: "mazes#play", as: "play_maze"
-  get 'mazes/:maze_id/play/:room_id', to: "mazes#move_to_room", as: "move_to_room"
+  get 'mazes/:id/publish', to: "mazes#publish", as: "publish_maze"
+  get 'mazes/:id/play', to: "mazes#play", as: "play_maze"
+  get 'mazes/:id/play/:room_id', to: "mazes#move_to_room", as: "move_to_room"
 end

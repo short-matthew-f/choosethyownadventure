@@ -82,6 +82,14 @@
               Edit
             <% end %>
     
+            <% unless maze.published %>
+              <%= link_to(publish_maze_url(maze), class: "btn btn-primary") do  %>
+                <span class="glyphicon glyphicon-book">
+                </span>
+                Publish
+              <% end %>
+            <% end %>
+    
             <%= link_to(maze_url(maze), class: "btn btn-primary", method: :delete, data: { confirm: "Really delete #{maze.title}?" } ) do %>
               <span class="glyphicon glyphicon-trash">
               </span>
