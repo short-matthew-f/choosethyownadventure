@@ -3,25 +3,23 @@
     <%= render 'devise/shared/header' %>
   </div>
 
-  <div class="col-md-4 profile sign-up">
+  <div class="col-md-4">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="panel">
+      <div class="panel panel-default profile sign-up">
         <%= devise_error_messages! %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3>
-              Enter your credentials
-            </h3>
-          </div>
-          <div class="panel-body">
-            <%= f.email_field :email, autofocus: true, placeholder: "email" %>
-          </div>
-          <div class="panel-body">
-            <%= f.password_field :password, autocomplete: "off", placeholder: "password" %>
-          </div>
-          <div class="panel-body">
-            <%= f.submit "Log in", class: "btn btn-primary" %>
-          </div>
+        <div class="panel-heading">
+          <h3>
+            Enter your credentials
+          </h3>
+        </div>
+        <div class="panel-body">
+          <%= f.email_field :email, autofocus: true, placeholder: "email" %>
+        </div>
+        <div class="panel-body">
+          <%= f.password_field :password, autocomplete: "off", placeholder: "password" %>
+        </div>
+        <div class="panel-body">
+          <%= f.submit "Log in", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>

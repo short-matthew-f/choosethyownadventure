@@ -26,7 +26,7 @@
       </div>
     </div>
     
-    <% if @profile.biography %>
+    <% if @profile.biography &&  !@profile.biography.empty? %>
       <div class="panel panel-default">
         <div class="panel-heading">Biography</div>
         <div class="panel-body">
