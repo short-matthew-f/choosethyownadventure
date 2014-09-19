@@ -3,9 +3,9 @@
     <%= render 'devise/shared/header' %>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4 profile sign-up">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="panel profile sign-up">
+      <div class="panel">
         <%= devise_error_messages! %>
         <div class="panel panel-default">
           <div class="panel-heading">
