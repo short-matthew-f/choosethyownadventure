@@ -57,6 +57,11 @@
               <% end %>
             </p>
           <% end %>
+          
+          <% unless room.win || room.lose %>
+            <hr>
+            <%= link_to "Abandon Maze", abandon_maze_url(room.maze) %>
+          <% end %>
         </div>
       </div>
     </div>

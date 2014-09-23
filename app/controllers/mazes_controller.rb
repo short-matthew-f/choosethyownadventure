@@ -51,6 +51,18 @@ class MazesController < ApplicationController
     end
   end
   
+  def abandon
+    @maze = Maze.find(params[:id])
+    @history = History.find_or_initialize_by(user: current_user, maze: @maze)
+    
+    @history.loss_count += 1
+    @history.room_id = nil
+    
+    @history.save
+    
+    redirect_to play_maze_url @maze
+  end
+  
   def update 
     @maze = Maze.find(params[:id])
     
