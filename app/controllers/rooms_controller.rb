@@ -14,14 +14,21 @@ class RoomsController < ApplicationController
   def create 
     @maze = Maze.find(params[:maze_id])
     
+    @start = @maze.rooms.none?
+    
     @room = Room.new(room_params)
+    
     @room.maze = @maze
+    @room.start = @start
     @room.win, @room.lose = win_conditions
     
     if @room.save
-      update_entrances(@room) unless @room.is_only_room?
+      update_entrances(@room) unless @maze.rooms.none?
       
-      @maze.update(published: false)
+      if @maze.published
+        @maze.update(published: false)
+        flash[:notice] = "Adding a room has caused your maze to become unpublished.  Publish again to make it public."
+      end
       
       redirect_to @maze
     else
@@ -40,8 +47,9 @@ class RoomsController < ApplicationController
   
   def edit
     @room = Room.find(params[:id])
+    @maze = @room.maze
     
-    @room.maze.rooms.each do |r|
+    @maze.rooms.each do |r|
       @room.entrances.find_or_initialize_by(entrance: r) unless r.id == @room.id
     end
   end
@@ -55,7 +63,10 @@ class RoomsController < ApplicationController
     if @room.update(room_params)
       update_entrances(@room) unless @room.is_only_room?
       
-      @maze.update(published: false)
+      if @maze.published
+        @maze.update(published: false)
+        flash[:notice] = "Changing a room has caused your maze to become unpublished.  Publish again to make it public."
+      end
       
       redirect_to @maze
     else

@@ -1,4 +1,10 @@
-<%= render partial: "shared/errors", locals: { error_object: room } if room.errors.any? %>
+<%= render partial: "shared/errors", locals: { error_object: @room } if @room.errors.any? %>
+
+<% if @maze.rooms.none? %>
+  <div class="alert alert-info">
+    Now that you've created <%= @maze.title %>, let's add a starting room.  This will be the room that users start from when they play your maze.  If you wish to change the start room, you'll be able to do so from the maze view page, later.
+  </div>
+<% end %>
 
 <%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
 
@@ -94,14 +100,25 @@
   
     <div class="row room">
       <%= f.fields_for :entrances do |e| %>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <em>Coming From</em>: <%= e.label e.object.entrance.name %>
+              <h4>
+               <b><%= e.object.entrance.name %></b>
+              </h4>
             </div>
             <div class="panel-body">
               <%= e.hidden_field :entrance_id, value: e.object.entrance.id %>
-              <%= e.text_field :description, class: "form-control" %>
+              <%= e.text_field :description, class: "form-control", placeholder: "Description of path to new room" %>
+            
+              
+            <% if e.object.entrance.previous_rooms.any? %>
+              <hr>
+                <h4>
+                  <%= e.object.entrance.name %> comes from: <%= e.object.entrance.previous_rooms.map(&:name).join(', ') %>
+                </h4>
+            <% end %>
+            
             </div>
           </div>
         </div>

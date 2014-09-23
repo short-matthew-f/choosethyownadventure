@@ -1,14 +1,20 @@
-<%= render partial: "shared/errors", locals: { error_object: @profile } if @profile.errors.any? %>
-
-<%= form_for [@user, @profile], html: { role: "form", multipart: true } do |f| %>
+<%= form_for form_object, html: { role: "form", multipart: true } do |f| %>
 
   <div class="panel profile">
     <h2>
-      <%= @profile.persisted? ? "Update" : "Create" %> your profile.
-    
-      <div class="pull-right">
-        <%= f.submit "Update Profile", class: "btn btn-primary" %>    
-      </div>
+      <% if profile.persisted? %>
+        Update your profile.
+        
+        <div class="pull-right">
+          <%= f.submit "Update Profile", class: "btn btn-primary" %>    
+        </div>
+      <% else %>
+        Create your profile.
+        
+        <div class="pull-right">
+          <%= f.submit "Create Profile", class: "btn btn-primary" %>    
+        </div>      
+      <% end %>
     </h2>
   </div>
 

@@ -22,14 +22,13 @@
 en:
   activerecord:
     attributes:
-      profile:
-        name: "Name"
-        location: "Location"
-      errors:
-        models:
-          profile:
-            attributes:
-              name:
-                blank: "is required."
-              location:
-                blank: "is required."
+      maze: 
+        published: "Publishing"
+    errors:
+      models:
+        maze:
+          attributes:
+            published:
+              disconnected: "a maze requires it to be fully connected.  You have rooms which are not hooked up to the rest of the maze."
+              unsolvable: "a maze requires it to have at least one ending, win or lose."
+              dead_ends: "a maze requires it to have no dead ends.  You have rooms from which there is no escape."

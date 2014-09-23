@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :ensure_user_has_created_profile, except: [:show]
+  before_filter :ensure_user_has_created_profile
   
   def show
     if params[:id]

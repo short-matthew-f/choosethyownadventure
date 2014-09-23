@@ -4,7 +4,6 @@ class ProfilesController < ApplicationController
   
   def new
     @user = current_user
-    
     @profile = Profile.new(user: @user)
   end
   
@@ -22,19 +21,15 @@ class ProfilesController < ApplicationController
   end
   
   def edit
-    @profile = Profile.find(params[:id])
+    @user = current_user
     
-    if @profile.user == current_user
-      render :edit
-    else
-      flash[:error] = "You cannot edit a profile that doesn't belong to you."
-      
-      redirect_to current_user
-    end
+    @profile = Profile.find_by(user: @user)
   end
   
   def update
-    @profile = Profile.find(params[:id])
+    @user = current_user
+    
+    @profile = Profile.find_by(user: @user)
     
     if @profile.update(profile_params)
       redirect_to current_user

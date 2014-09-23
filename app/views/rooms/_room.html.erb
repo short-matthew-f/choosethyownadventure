@@ -13,18 +13,23 @@
         <% end %>
       <% end %>
       
-      <% if room.is_disconnected? %>
-        <span class="glyphicon glyphicon-exclamation-sign">
+      <% if room.is_disconnected? %> 
+        <span class="glyphicon glyphicon-exclamation-sign" title="This room is not connected to the maze.">
+        </span>
+      <% end %>
+      
+      <% if room.is_dead_end? %>
+        <span class="glyphicon glyphicon-exclamation-sign" title="This room has no way out.">
         </span>
       <% end %>
       
       <% if room.win %>
-        <span class="glyphicon glyphicon-thumbs-up">
+        <span class="glyphicon glyphicon-thumbs-up" title="User wins here.">
         </span>
       <% end %>
       
       <% if room.lose %>
-        <span class="glyphicon glyphicon-thumbs-down">
+        <span class="glyphicon glyphicon-thumbs-down" title="User loses here.">
         </span>
       <% end %> 
       
@@ -64,6 +69,11 @@
     
     <hr>
     
-    <b>Comes from:</b> <%= room.previous_rooms.map(&:name).join(', ') %>
+    <p>
+      <b>Comes from:</b> <%= room.previous_rooms.map(&:name).join(', ') %>
+    </p>
+    <p>
+      <b>Goes to:</b> <%= room.next_rooms.map(&:name).join(', ') %>
+    </p>
   </div>
 </div>  

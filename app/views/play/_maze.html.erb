@@ -1,3 +1,5 @@
+<%= render partial: "shared/errors", locals: { error_object: maze } if maze.errors.any? %>
+
 <div class="row">
     
   <div class="col-md-3">
@@ -70,8 +72,8 @@
       </div>
       <div class="panel-body">
         
-        <% if maze.picture %>
-          <%= image_tag(maze.image.url, class: "maze-image pull-right") %>
+        <% if true %>
+          <%= image_tag(maze.picture.url, class: "maze-image pull-right") %>
         <% end %>
         
         <%= maze.description.html_safe %>

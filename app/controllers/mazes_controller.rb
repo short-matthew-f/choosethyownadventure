@@ -16,7 +16,7 @@ class MazesController < ApplicationController
     @maze.author = current_user
     
     if @maze.save
-      redirect_to @maze
+      redirect_to new_maze_room_url @maze
     else
       flash[:errors] = @maze.errors.full_messages
       render :new
@@ -43,12 +43,12 @@ class MazesController < ApplicationController
     @maze = Maze.find(params[:id])
     
     if @maze.update(published: true)
-      
+      redirect_to @maze
     else
-      flash[:errors] = @maze.errors.full_messages
+      flash.now[:errors] = @maze.errors.full_messages
+      
+      render :show
     end
-         
-    redirect_to @maze
   end
   
   def update 

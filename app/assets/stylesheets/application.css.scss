@@ -371,7 +371,7 @@ div.full-width-buttons {
   }
 
   .btn.btn-primary.active {
-    background: $maze-heading;
+    background: lighten($maze-heading, 20%);
   }
 }
 

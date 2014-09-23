@@ -39,6 +39,10 @@ class Room < ActiveRecord::Base
     self.maze.disconnected_rooms.include?(self) if self.maze.disconnected_rooms
   end
   
+  def is_dead_end?
+    self.maze.dead_ends.include?(self) if self.maze.dead_ends
+  end
+  
   def start_or_end
     if self.start && (self.win || self.lose)
       errors.add(:start, "room cannot be the final room.")
