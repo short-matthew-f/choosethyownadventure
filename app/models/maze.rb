@@ -89,7 +89,7 @@ class Maze < ActiveRecord::Base
   end
   
   def dead_ends
-    middle_rooms = self.rooms.where('win=? OR lose=?', false, false)
+    middle_rooms = self.rooms.where('win=? AND lose=?', false, false)
     
     middle_rooms.select do |room|
       room.next_rooms.none?
