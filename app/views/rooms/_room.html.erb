@@ -42,10 +42,7 @@
   <div class="panel-body">
     <div class="clearfix">
       <div class="description clearfix">
-        <% if room.picture %>
-          <%= image_tag(room.image.url, class: "maze-image pull-left") %>
-        <% end %>
-        
+        <%= image_tag(room.image.url, class: "maze-image pull-left") if room.picture %>
         <%= room.description.html_safe %>
       </div>
     

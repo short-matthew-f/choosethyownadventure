@@ -73,7 +73,7 @@
       <div class="panel-body">
         
         <% if true %>
-          <%= image_tag(maze.picture.url, class: "maze-image pull-right") %>
+          <%= image_tag(maze.picture.url, class: "maze-image pull-right") if maze.picture %>
         <% end %>
         
         <%= maze.description.html_safe %>
