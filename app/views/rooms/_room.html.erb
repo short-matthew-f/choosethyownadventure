@@ -18,7 +18,7 @@
         </span>
       <% end %>
       
-      <% if room.is_dead_end? %>
+      <% if room.is_dead_end? && !(room.win || room.lose) %>
         <span class="glyphicon glyphicon-exclamation-sign" title="This room has no way out.">
         </span>
       <% end %>

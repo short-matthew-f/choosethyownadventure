@@ -1,5 +1,3 @@
-<%= render partial: "shared/errors", locals: { error_object: @maze } if @maze.errors.any? %>
-
 <%= render partial: @maze, locals: { reference: :show } %>
 
 <% if @maze.author == current_user %>
